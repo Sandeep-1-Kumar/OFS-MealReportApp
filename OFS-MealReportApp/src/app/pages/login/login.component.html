@@ -1,0 +1,77 @@
+<!-- <mat-card class="example-card">
+	<mat-card-header>
+	  <mat-card-title>Login</mat-card-title>
+	</mat-card-header>
+	<mat-card-content>
+	  <form class="example-form">
+		<table class="example-full-width" cellspacing="0">
+		  <tr>
+			<td>
+			  <mat-form-field class="example-full-width">
+			  <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+			  </mat-form-field>
+			</td>
+		  </tr>
+		  <tr>
+		  <td><mat-form-field class="example-full-width">
+			<input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
+		  </mat-form-field></td>
+		</tr></table>
+	  </form> -->
+	  <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner> -->
+	<!-- </mat-card-content>
+	<mat-card-actions>
+	  <button mat-raised-button (click)="login()" color="primary">Login</button>
+	</mat-card-actions>
+  </mat-card> -->
+  <div class="container-fluid">
+    <div class="row no-gutter">
+        <!-- The image half -->
+        <div class="col-md-6 d-none d-md-flex bg-image">
+
+			
+		</div>
+
+		
+        <!-- The content half -->
+        <div class="col-md-6 bg-light">
+			<!-- <div class="text-center mt-5">
+				<img src="assets/ofs.jpg" alt="Logo" width="200">
+			</div> -->
+            <div class="login d-flex align-items-center py-5">
+				
+                <!-- Demo content-->
+                <div class="container">
+                    <div class="row">
+						
+                        <div class="col-lg-10 col-xl-7 mx-auto">
+                            <!-- <h3 class="display-4">Split page!</h3>
+                            <p class="text-muted mb-4">Create a login split page using Bootstrap 4.</p> -->
+							<div class="text-center mb-4">
+								<img src="assets/ofs.jpg" alt="Logo" width="200">
+							  </div>
+                            <form>
+								
+                                <div class="form-group mb-3">
+                                    <input id="username" type="text" [(ngModel)]="username" placeholder="username"  name="username"required="" autofocus="" class="form-control rounded-pill border-0 shadow-sm px-4">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input id="inputPassword" type="password" [(ngModel)]="password" placeholder="Password" name="password" required="" class="form-control rounded-pill border-0 shadow-sm px-4 text-primary">
+                                </div>
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                                    <label for="customCheck1" class="custom-control-label">Remember password</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm" (click)="login()">Sign in</button>
+                                <!-- <div class="text-center d-flex justify-content-between mt-4"><p>Code by <a href="#" class="font-italic text-muted"> 
+                                        <u>Jassa</u></a></p></div> -->
+                            </form>
+                        </div>
+                    </div>
+                </div><!-- End -->
+
+            </div>
+        </div><!-- End -->
+
+    </div>
+</div>

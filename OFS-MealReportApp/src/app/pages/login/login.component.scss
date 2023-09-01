@@ -1,0 +1,26 @@
+.rounded-t-5 {
+	border-top-left-radius: 0.5rem;
+	border-top-right-radius: 0.5rem;
+  }
+
+  @media (min-width: 992px) {
+	.rounded-tr-lg-0 {
+	  border-top-right-radius: 0;
+	}
+
+	.rounded-bl-lg-5 {
+	  border-bottom-left-radius: 0.5rem;
+	}
+  }
+  /* Add this CSS to your component's stylesheet or a global stylesheet */
+  .login,
+  .image {
+	min-height: 100vh;
+  }
+  
+  .bg-image {
+	background-image: url('https://therichpost.com/wp-content/uploads/2021/02/login-split.jpg');
+	background-size: cover;
+	background-position: center center;
+  }
+  

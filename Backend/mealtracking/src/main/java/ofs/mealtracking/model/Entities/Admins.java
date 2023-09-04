@@ -1,11 +1,10 @@
 package ofs.mealtracking.model.Entities;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Entity
 public class Admins {
@@ -31,11 +30,9 @@ public class Admins {
   }
 
   public void setPassword(String password) {
-   // BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-   // this.password = passwordEncoder.encode(password);
-   this.password = password;
-
-}
+   BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+   this.password = passwordEncoder.encode(password);
+  }
 
   private String username;
   private String password;

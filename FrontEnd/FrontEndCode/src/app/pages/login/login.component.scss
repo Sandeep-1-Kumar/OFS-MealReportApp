@@ -13,6 +13,11 @@
 	}
   }
 
+  .image-container {
+	background: linear-gradient(to bottom, #007bff, #ffffff); /* Adjust the colors as needed */
+	padding: 20px; /* Add padding to control the space between the image and the gradient background */
+  }
+  
 /* Green Heading */
 .green-heading {
 	color: green;
@@ -58,4 +63,14 @@
 	max-width: 600px;
 	position: relative;
   }
- 
+  .gradient-bg {
+	background: linear-gradient(to bottom, #007BFF, #FFFFFF);
+	border-radius: 10px; /* Optional: Add rounded corners */
+	padding: 20px; /* Optional: Add padding to the content container */
+	height: 100%; /* Ensure the container takes up the full height */
+  }
+  .rounded-image {
+	border-radius: 10px; /* Adjust the value to control the roundness of the corners */
+  }
+  
+  

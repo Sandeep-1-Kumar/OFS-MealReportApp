@@ -1,0 +1,157 @@
+
+<div class="form_wrapper">
+    <div class="form_container">
+      <div class="title_container">
+        <h2>Registration Form</h2>
+      </div>
+      <div class="row clearfix">
+        <div class="">
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" >
+                <!-- Username Field -->
+                <div class="input_field">
+                  <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                  <input type="text" formControlName="username" placeholder="Username" required />
+                </div>
+              
+                <!-- Email Field -->
+                <div class="input_field">
+                  <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                  <input type="email" formControlName="email" placeholder="Email" required />
+                </div>
+              
+                <!-- Password Field -->
+                <div class="input_field">
+                  <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                  <input type="password" formControlName="password" placeholder="Password" required />
+                </div>
+              
+                <!-- Site Name Field -->
+                <div class="input_field">
+                  <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                  <input type="text" formControlName="siteName" placeholder="Site Name" required />
+                </div>
+              
+                <!-- Site Supervisor Field -->
+                <div class="input_field">
+                  <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                  <input type="text" formControlName="siteSupervisor" placeholder="Site Supervisor" required />
+                </div>
+              
+                <!-- Site Address Field -->
+                <div class="input_field">
+                  <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                  <input type="text" formControlName="siteAddress" placeholder="Site Address" required />
+                </div>
+              
+                <!-- Meal Service Time Fields -->
+                <!-- ... Time picker fields ... -->
+              <!-- Breakfast Time Field -->
+<div class="form-group">
+    <label class="bold-label" for="breakfastTime">Breakfast Time:</label>
+    <div class="timepicker">
+      <input
+        #breakfastTimeInput
+        type="text"
+        placeholder="Select Time"
+        aria-label="Breakfast Time"
+        [ngxTimepicker]="breakfastTimepicker"
+        readonly
+        formControlName="breakfastTime" 
+      >
+      <ngx-material-timepicker #breakfastTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+    </div>
+  </div>
+  
+  <!-- Lunch Time Field -->
+  <div class="form-group">
+    <label class="bold-label" for="lunchTime">Lunch Time:</label>
+    <div class="timepicker">
+      <input
+        type="text"
+        placeholder="Select Time"
+        aria-label="Lunch Time"
+        [ngxTimepicker]="lunchTimepicker"
+        readonly
+        formControlName="lunchTime" 
+      >
+      <ngx-material-timepicker #lunchTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+    </div>
+  </div>
+  
+  <!-- Supper Time Field -->
+  <div class="form-group">
+    <label class="bold-label" for="supperTime">Supper Time:</label>
+    <div class="timepicker">
+      <input
+        type="text"
+        placeholder="Select Time"
+        aria-label="Supper Time"
+        [ngxTimepicker]="supperTimepicker"
+        readonly
+        formControlName="supperTime" 
+      >
+      <ngx-material-timepicker #supperTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+    </div>
+  </div>
+  
+  <!-- Snack Time Field -->
+  <div class="form-group">
+    <label class="bold-label" for="snackTime">Snack Time:</label>
+    <div class="timepicker">
+      <input
+        type="text"
+        placeholder="Select Time"
+        aria-label="Snack Time"
+        [ngxTimepicker]="snackTimepicker"
+        readonly
+        formControlName="snackTime" 
+      >
+      <ngx-material-timepicker #snackTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+    </div>
+  </div>
+  <!-- Meal Days Field -->
+<div class="form-group meal-days-box">
+    <label class="bold-label">Meal Days:</label>
+    <div class="days-checkboxes">
+      <label class="day-checkbox">
+        <input type="checkbox" formControlName="Monday">
+        <span class="checkbox-symbol"></span> Mon
+      </label>
+      <label class="day-checkbox">
+        <input type="checkbox" formControlName="Tuesday">
+        <span class="checkbox-symbol"></span> Tue
+      </label>
+      <label class="day-checkbox">
+        <input type="checkbox" formControlName="Wednesday">
+        <span class="checkbox-symbol"></span> Wed
+      </label>
+      <label class="day-checkbox">
+        <input type="checkbox" formControlName="Thursday">
+        <span class="checkbox-symbol"></span> Thu
+      </label>
+      <label class="day-checkbox">
+        <input type="checkbox" formControlName="Friday">
+        <span class="checkbox-symbol"></span> Fri
+      </label>
+      <label class="day-checkbox">
+        <input type="checkbox" formControlName="Saturday">
+        <span class="checkbox-symbol"></span> Sat
+      </label>
+      <label class="day-checkbox">
+        <input type="checkbox" formControlName="Sunday">
+        <span class="checkbox-symbol"></span> Sun
+      </label>
+      <input type="text" formControlName="mealDays" readonly>
+    </div>
+  </div>
+      
+              
+                <!-- Submit Button -->
+                <input class="button" type="submit" value="Register" />
+              </form>
+              
+        </div>
+      </div>
+    </div>
+  </div>
+  

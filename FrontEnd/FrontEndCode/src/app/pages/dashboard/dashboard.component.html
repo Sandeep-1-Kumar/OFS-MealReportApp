@@ -1,1 +1,120 @@
-<p>dashboard works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <h2>Dashboard</h2>
+    <!-- Add your CSS stylesheets and other meta tags here -->
+    <style>
+        /* Add your custom CSS styles here */
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .dashboard-heading {
+            flex: 25%;
+            background-color: #007bff; /* Adjust the background color */
+            color: white; /* Adjust the text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .dashboard-heading h1 {
+        font-size: 50px; /* You can adjust the font size as needed */
+    }
+
+        .main-content {
+            flex: 70%;
+            background-color: #f1f1f1; /* Adjust the background color */
+            padding: 20px;
+        }
+
+        .date-time-card {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-heading">
+            <h1>Dashboard</h1>
+        </div>
+        <main class="main-content">
+           
+            <div class="button-container">
+                <!-- <button mat-raised-button color="warn" routerLink="/Signup" class="button-item">
+                  <mat-icon style="font-size: 36px;">account_box</mat-icon>
+                  <div class="button-text">Add Site User</div>
+                </button>
+              
+                <button mat-raised-button color="warn" routerLink="/Signup" class="button-item">
+                  <mat-icon>home</mat-icon>
+                  <div class="button-text">Home</div>
+                </button>
+              
+                <button mat-raised-button color="warn" routerLink="/Signup" class="button-item">
+                  <mat-icon>settings</mat-icon>
+                  <div class="button-text">Settings</div>
+                </button>
+              
+                <button mat-raised-button color="warn" routerLink="/Signup" class="button-item">
+                  <mat-icon>note_add</mat-icon>
+                  <div class="button-text">Add Note</div>
+                </button> -->
+
+
+                <button class="icon-button"[routerLink]="['/Signup']" >
+                    <img src="assets/user-gear.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                    Add Site user
+                  </button>
+                  
+                  <button class="icon-button"[routerLink]="['/Signup']" >
+                    <img src="assets/settings.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                   settings
+                  </button>
+
+                  <button class="icon-button"[routerLink]="['/Signup']" >
+                    <img src="assets/home-button.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                   settings
+                  </button>
+                  <button class="icon-button"[routerLink]="['/Signup']" >
+                    <img src="assets/edit.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                   settings
+                  </button>
+              </div>
+               
+            <br>
+            <mat-card class="date-time-card">
+                <mat-card-header>
+                  <mat-card-title>Date & Time</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <div class="datetime">
+                    <div class="icon-container">
+                      <mat-icon class="icon" aria-hidden="false">access_time</mat-icon> <!-- Use a Material Design icon -->
+                      <img src="assets/time.png" alt="Image Icon">
+                    </div>
+                    <div class="date-time-details">
+                      <div class="date-time-text">
+                        <div class="date"><b>{{ currentDate | date:'longDate' }}</b></div>
+                        <div class="time"><b>{{ currentTime | date:'mediumTime' }}</b></div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+              
+              
+        </main>
+    </div>
+</body>
+</html>

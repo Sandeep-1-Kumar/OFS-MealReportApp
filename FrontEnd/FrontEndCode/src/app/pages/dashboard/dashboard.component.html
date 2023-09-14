@@ -49,69 +49,59 @@
             <h1>Dashboard</h1>
         </div>
         <main class="main-content">
-           
+            <div class="actions-heading">Actions :</div>
+            <br>
             <div class="button-container">
-                <!-- <button mat-raised-button color="warn" routerLink="/Signup" class="button-item">
-                  <mat-icon style="font-size: 36px;">account_box</mat-icon>
-                  <div class="button-text">Add Site User</div>
-                </button>
-              
-                <button mat-raised-button color="warn" routerLink="/Signup" class="button-item">
-                  <mat-icon>home</mat-icon>
-                  <div class="button-text">Home</div>
-                </button>
-              
-                <button mat-raised-button color="warn" routerLink="/Signup" class="button-item">
-                  <mat-icon>settings</mat-icon>
-                  <div class="button-text">Settings</div>
-                </button>
-              
-                <button mat-raised-button color="warn" routerLink="/Signup" class="button-item">
-                  <mat-icon>note_add</mat-icon>
-                  <div class="button-text">Add Note</div>
-                </button> -->
-
-
+               
                 <button class="icon-button"[routerLink]="['/Signup']" >
-                    <img src="assets/user-gear.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                    <img src="assets/add-friend.png" alt="Button Image" style="width: 100px; height: 100px;"> 
                     Add Site user
                   </button>
-                  
+
                   <button class="icon-button"[routerLink]="['/Signup']" >
-                    <img src="assets/settings.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                   settings
+                    <img src="assets/edit.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                   Add Meal Count
                   </button>
 
                   <button class="icon-button"[routerLink]="['/Signup']" >
                     <img src="assets/home-button.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                   settings
+                   Home
                   </button>
+
                   <button class="icon-button"[routerLink]="['/Signup']" >
-                    <img src="assets/edit.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                   settings
+                    <img src="assets/settings.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                   Settings
                   </button>
+                 
               </div>
                
-            <br>
-            <mat-card class="date-time-card">
-                <mat-card-header>
-                  <mat-card-title>Date & Time</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
-                  <div class="datetime">
-                    <div class="icon-container">
-                      <mat-icon class="icon" aria-hidden="false">access_time</mat-icon> <!-- Use a Material Design icon -->
-                      <img src="assets/time.png" alt="Image Icon">
-                    </div>
-                    <div class="date-time-details">
-                      <div class="date-time-text">
-                        <div class="date"><b>{{ currentDate | date:'longDate' }}</b></div>
-                        <div class="time"><b>{{ currentTime | date:'mediumTime' }}</b></div>
+
+              <div class="mat-card-container">
+                <mat-card class="mat-card">
+                  <mat-card-content>
+                    <div class="mat-card-content-container">
+                      <img src="assets/time.png" alt="Profile Pic" class="mat-card-image">
+                      <div class="mat-card-text">
+                        <div class="date-time-text">
+                            <div class="date"><h4>{{ currentDate | date:'mediumDate' }}</h4></div>
+                            <div class="time"><h4>{{ currentTime | date:'shortTime' }}</h4></div>
+                          </div>
+                        <!-- <h3>Title goes here</h3>
+                        <p>Secondary text</p> -->
                       </div>
                     </div>
-                  </div>
-                </mat-card-content>
-              </mat-card>
+                  </mat-card-content>
+                  <!-- <mat-card-actions>
+                    <button mat-button color="primary">Primary</button>
+                    <button mat-button color="accent">Action</button>
+                  </mat-card-actions> -->
+                </mat-card>
+              </div>
+              
+              
+            
+             
+           
               
               
         </main>

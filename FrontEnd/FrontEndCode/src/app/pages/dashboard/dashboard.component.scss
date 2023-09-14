@@ -6,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  background: none;
 }
 
 .icon-button img {
@@ -24,6 +25,7 @@
     display: flex;
     justify-content: space-between; /* Add space between the buttons */
     flex-wrap: wrap; /* Allow buttons to wrap to the next row */
+    align-items: center;
   }
   
   .button-item {
@@ -65,44 +67,99 @@
     }
   }
 
-  .icon-container {
-    background-color: transparent; /* Transparent background */
-    border-radius: 50%; /* Makes the container round */
-    padding: 10px; /* Adjust padding as needed for the desired size */
-    display: flex;
-    align-items: center; /* Vertically align items */
-    margin-right: 10px; /* Add spacing between the icon and image */
-  }
-  .icon-container img {
-    width: 100px; /* Set the desired width */
-    height: 100px; /* Set the desired height */
-    margin-right: 5px; /* Add spacing between the icon and image */
-  }
+ 
   
-  
-  .date-time-text {
-    font-weight: bold; /* Make the text bold */
-  }
-  
-  /* Adjust the font size and color if needed */
-  .date-time-text .date,
-  .date-time-text .time {
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .icon {
-    font-size: 24px; /* Adjust the font size as needed for the icon */
-    color: #007bff; /* Adjust the icon color */
-  }
-  
-  .icon img {
-    width: 24px; /* Adjust the image width as needed */
-    height: 24px; /* Adjust the image height as needed */
-    margin-right: 5px; /* Add spacing between the icon and image */
-  }
-  .date-time-card {
-    max-width: 400px; /* Set the maximum width for the mat-card */
-    margin: 0 auto; /* Center the card horizontally */
-  }
-  
+ 
+ 
+
+
+
+
+
+.button-text {
+  display: block;
+  font-weight: bold;
+}
+
+.half-card {
+  display: flex;
+  width: 100%; /* Ensure the card takes up the entire width */
+  max-width: 600px; /* Adjust the max-width as needed */
+}
+
+.left-half,
+.right-half {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+
+
+img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 8px; /* Adjust the spacing between the image and text as needed */
+}
+
+p {
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+
+
+.mat-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.mat-card {
+  width: 100%;
+  max-width: 400px; /* Adjust the maximum width as needed */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #007bff, #ffffff);
+}
+
+.mat-card-content-container {
+  display: flex;
+  align-items: center;
+}
+
+.mat-card-image {
+  width: 112px; /* Adjust the image dimensions as needed */
+  height: 112px;
+  margin-right: 20px; /* Adjust the spacing between image and text as needed */
+  object-fit: cover; /* To maintain aspect ratio and fill the container */
+}
+
+.mat-card-text {
+  flex-grow: 1;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  margin-left: 8px; /* Adjust spacing between buttons as needed */
+}
+.actions-heading {
+ /* Bluish violet background color */
+ /* Purple-Blue background color */
+ color: #0172fd; 
+  font-weight: bold;
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 32px;
+  padding: 5px; /* Add padding to create space around the text */
+}
+

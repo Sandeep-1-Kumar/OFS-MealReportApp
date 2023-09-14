@@ -22,10 +22,8 @@ public class SecurityConfig {
         })
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .antMatchers("/OFS/admin/signIn").permitAll()
-                                .antMatchers("/OFS/admin/create").permitAll()
-                                .antMatchers("/OFS/siteuser/signIn").permitAll()
-                                .antMatchers("/OFS/siteuser/create").permitAll()
+                                .antMatchers("/OFS/admin").permitAll()
+                                .antMatchers("/OFS/siteuser").permitAll()
                 );
         return http.build();
     }

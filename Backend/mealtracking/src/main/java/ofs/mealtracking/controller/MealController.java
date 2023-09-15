@@ -1,14 +1,15 @@
 package ofs.mealtracking.controller;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.web.bind.annotation.CrossOrigin;
-
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import ofs.mealtracking.model.Entities.Mealcount;
@@ -18,13 +19,19 @@ import ofs.mealtracking.model.Responses.MealOperationsResponseJson;
 import ofs.mealtracking.repositories.MealCountRepository;
 import ofs.mealtracking.repositories.SiteusersRepository;
 
+
+import java.text.SimpleDateFormat;
 import java.util.*;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 
 @CrossOrigin
 @RestController
 @RequestMapping(path="/OFS")
 public class MealController {
+
     public static final String MEAL_ADD_IN_SUCCESS_CODE = "201";
     public static final String MEAL_ADD_IN_FAILURE_CODE = "409";
     public static final String MEAL_UPDATE_SUCCESS_CODE = "204";
@@ -45,12 +52,16 @@ public class MealController {
         put(MEAL_UPDATE_FAILURE_CODE, MEAL_UPDATE_FAILURE_DESCRIPTION);
     }};
 
-
     @Autowired
     private SiteusersRepository siteusersRepository;
 
     @Autowired
     private MealCountRepository mealCountRepository;
+
+    @Autowired
+    private EntityManager entityManager;
+
+    
 
     @PostMapping(path = "/siteuser/addMealCount")
     public @ResponseBody MealOperationsResponseJson 
@@ -115,8 +126,106 @@ updateMealCount(@PathVariable Long mealCountId, @RequestBody MealCountRequestJso
     return mealOperationsResponseJson;
 }
 
+ @GetMapping(path = "/dummy/getMealCounts")
+    public @ResponseBody List<Mealcount> DummygetMealCounts(
+        @RequestParam(required = false) String site,
+        @RequestParam(required = false) String date,
+        @RequestParam(required = false) String mealType,
+        @RequestParam(required = false) String program
+    ) {
+        try 
+        {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date utilDate = dateFormat.parse(date);
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            Mealcount mealCount = new Mealcount();
+            mealCount.setSiteuser(new Siteusers());
+            mealCount.setMealDate(sqlDate);
+            mealCount.setMealType(mealType);
+            mealCount.setProgram(program);
+            System.out.println(sqlDate);
+            System.out.println(mealType);
+            System.out.println(program);
+            ExampleMatcher matcher = ExampleMatcher.matching()
+                .withMatcher("mealdate", ExampleMatcher.GenericPropertyMatchers.exact())
+                .withMatcher("mealtype", ExampleMatcher.GenericPropertyMatchers.exact())
+                .withMatcher("program", ExampleMatcher.GenericPropertyMatchers.exact());
+            Example<Mealcount> example = Example.of(mealCount, matcher);
+            List<Mealcount> filteredMealCounts = mealCountRepository.findAll(example);
+            return filteredMealCounts;
+        } catch (Exception e) {
+            System.out.println("error");
+            System.out.println(e.getMessage());
+            return new ArrayList<>();
+        }
+        
+    }
+    @GetMapping(path = "/admin/getMealCounts")
+@SuppressWarnings("unchecked")
+public List<Map<String, Object>> adminGetMealCounts(
+    @RequestParam(required = false) String siteUserId,
+    @RequestParam(required = false) String mealType,
+    @RequestParam(required = false) String date,
+    @RequestParam(required = false) String program
+) {
+    try {
+        String tableName = "mealcount";
+        String query = "SELECT * FROM " + tableName + " WHERE 1=1";
+        
+        if (siteUserId != null && !siteUserId.isEmpty()) {
+            query += " AND siteuserid = :siteUserId";
+        }
 
+        if (mealType != null && !mealType.isEmpty()) {
+            query += " AND mealtype = :mealType";
+        }
 
+        if (date != null && !date.isEmpty()) {
+            query += " AND mealdate = :date";
+        }
+
+        if (program != null && !program.isEmpty()) {
+            query += " AND program = :program";
+        }
+        
+        Query nativeQuery = entityManager.createNativeQuery(query);
+
+        if (siteUserId != null && !siteUserId.isEmpty()) {
+            nativeQuery.setParameter("siteUserId", siteUserId);
+        }
+
+        if (mealType != null && !mealType.isEmpty()) {
+            nativeQuery.setParameter("mealType", mealType);
+        }
+
+        if (date != null && !date.isEmpty()) {
+            nativeQuery.setParameter("date", date);
+        }
+
+        if (program != null && !program.isEmpty()) {
+            nativeQuery.setParameter("program", program);
+        }
+
+        List<Object[]> results = nativeQuery.getResultList();
+        List<Map<String, Object>> responseList = new ArrayList<>();
+
+        for (Object[] row : results) {
+            Map<String, Object> responseMap = new HashMap<>();
+            responseMap.put("id", row[0]);
+            responseMap.put("siteuserid", row[1]);
+            responseMap.put("mealdate", row[2]);
+            responseMap.put("mealtype", row[3]);
+            responseMap.put("program", row[4]);
+            responseMap.put("mealcount", row[5]);
+            responseMap.put("comment", row[6]);
+            responseList.add(responseMap);
+        }
+        return responseList;
+    } catch (Exception e) {
+        return new ArrayList<>();
+    }
+}
+    
 
 }
 

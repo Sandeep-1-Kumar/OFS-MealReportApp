@@ -6,55 +6,40 @@ import { Router ,ActivatedRoute} from '@angular/router';
 
 
 import { UserDataService } from 'src/app/services/user-data.service';
-interface MealCount {
-  username: string;
-  mealDate: string;
-  mealType: string;
-  program: string;
-  mealCount: number;
-  comment: string;
-} 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  
-
   currentDate: Date = new Date();
   currentTime: Date = new Date();
   userData: string='';
-  filterValue: string = '';
-  displayedColumns: string[] = ['username', 'mealDate', 'mealType', 'program', 'mealCount', 'comment'];
-  dataSource: MatTableDataSource<MealCount> = new MatTableDataSource<MealCount>([]); // Provide an empty array
-
-
+  displayedColumns = ['username', 'mealDate', 'mealType', 'program', 'mealCount', 'comment'];
+  dataSource = new MatTableDataSource<MealCount>([]);
   constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private userDataService: UserDataService) {}
+ 
+
   applyFilter(filterValue: string) {
-    filterValue = (filterValue || '').trim().toLowerCase(); // Ensure filterValue is a string
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
-  
+
+
   
   ngOnInit(): void {
-    // Update the time every second
-    this.route.params.subscribe(params => {
-      // Retrieve user data from the service
-      this.userData = this.userDataService.getUserData();
-    });
-
-
-    
-
+  
     setInterval(() => {
       this.currentTime = new Date();
     }, 1000);
+    
 
-    this.http.get<MealCount[]>('http://localhost:8080/OFS/admin/getMealCounts').subscribe(
+    this.http.get<MealCount[]>('http://localhost:8080/OFS/admin/getMealCounts')
+    .subscribe(
       (mealCounts) => {
-        // Set the data to the dataSource
-        console.log('Meal Counts:', mealCounts); 
+        console.log(mealCounts);
         this.dataSource.data = mealCounts;
       },
       (error) => {
@@ -65,3 +50,18 @@ export class DashboardComponent {
   
   
 }
+export interface MealCount {
+  username: string;
+  mealDate: string;
+  mealType: string;
+  program: string;
+  mealCount: number;
+  comment: string;
+}
+
+const MEAL_COUNT_DATA: MealCount[] = [
+  { username: 'John', mealDate: '2023-09-14', mealType: 'Breakfast', program: 'Program A', mealCount: 2, comment: 'No special requests' },
+  { username: 'Alice', mealDate: '2023-09-14', mealType: 'Lunch', program: 'Program B', mealCount: 1, comment: 'Vegetarian' },
+  // Add more data as needed
+];
+

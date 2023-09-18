@@ -13,6 +13,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+
 import { 
 	IgxButtonModule,
 	IgxIconModule,
@@ -20,21 +24,26 @@ import {
 	IgxRippleModule
  } from "igniteui-angular";
  import {MatDividerModule} from '@angular/material/divider';
+import { SiteuserDashboardComponent } from './pages/siteuser-dashboard/siteuser-dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    SignupSiteuserComponent
+    SignupSiteuserComponent,
+    SiteuserDashboardComponent
   ],
   imports: [
     BrowserModule,
     MatDividerModule,
+    MatPaginatorModule,
     MatCardModule,
     AppRoutingModule,
+    MatTableModule,
     HttpClientModule,
     FormsModule,
     MatIconModule,
+    MatInputModule,
     MatButtonModule,
     NgxMaterialTimepickerModule,
     ReactiveFormsModule,

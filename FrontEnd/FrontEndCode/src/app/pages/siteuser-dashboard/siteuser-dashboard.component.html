@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <h2>Dashboard</h2>
+    <!-- Add your CSS stylesheets and other meta tags here -->
+    <style>
+        /* Add your custom CSS styles here */
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .dashboard-heading {
+            flex: 25%;
+            background-color: #007bff; /* Adjust the background color */
+            color: white; /* Adjust the text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .dashboard-heading h1 {
+        font-size: 50px; /* You can adjust the font size as needed */
+    }
+
+        .main-content {
+            flex: 70%;
+            background-color: #f1f1f1; /* Adjust the background color */
+            padding: 20px;
+        }
+
+        .date-time-card {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-heading">
+            <h1 class="dashboard-heading"> Welcome, {{ userData|| 'User' }}!</h1>
+        </div>
+        <main class="main-content">
+            <div class="actions-heading">Actions :</div>
+            <br>
+            <div class="button-container">
+               
+               
+
+                  <button class="icon-button"[routerLink]="['/Signup']" >
+                    <img src="assets/edit.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                   Add Meal Count
+                  </button>
+
+                  <button class="icon-button"[routerLink]="['/Signup']" >
+                    <img src="assets/home-button.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                   Home
+                  </button>
+
+                  <button class="icon-button"[routerLink]="['/Signup']" >
+                    <img src="assets/settings.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                   Settings
+                  </button>
+                 
+              </div>
+               
+
+              <div class="mat-card-container">
+                <mat-card class="mat-card">
+                  <mat-card-content>
+                    <div class="mat-card-content-container">
+                      <img src="assets/time.png" alt="Profile Pic" class="mat-card-image">
+                      <div class="mat-card-text">
+                        <div class="date-time-text">
+                            <div class="date"><h4>{{ currentDate | date:'mediumDate' }}</h4></div>
+                            <div class="time"><h4>{{ currentTime | date:'shortTime' }}</h4></div>
+                          </div>
+                        <!-- <h3>Title goes here</h3>
+                        <p>Secondary text</p> -->
+                      </div>
+                    </div>
+                  </mat-card-content>
+                  <!-- <mat-card-actions>
+                    <button mat-button color="primary">Primary</button>
+                    <button mat-button color="accent">Action</button>
+                  </mat-card-actions> -->
+                </mat-card>
+              </div>
+              
+              
+            
+             
+           
+              
+              
+        </main>
+    </div>
+</body>
+</html>

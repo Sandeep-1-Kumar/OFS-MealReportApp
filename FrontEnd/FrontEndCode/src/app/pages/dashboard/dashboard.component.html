@@ -1,110 +1,158 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
- 
-    <h2>Dashboard</h2>
-    <!-- Add your CSS stylesheets and other meta tags here -->
-    <style>
-        /* Add your custom CSS styles here */
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <h2>Dashboard</h2>
+        <!-- Add your CSS stylesheets and other meta tags here -->
+        <style>
+            /* Add your custom CSS styles here */
+            body, html {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .dashboard-container {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+
+            .dashboard-heading {
+                flex: 10%;
+                background-color: #007bff; /* Adjust the background color */
+                color: white; /* Adjust the text color */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .dashboard-heading h1 {
+            font-size: 50px; /* You can adjust the font size as needed */
         }
 
-        .dashboard-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
+            .main-content {
+                flex: 95%;
+                background-color: #f1f1f1; /* Adjust the background color */
+                padding: 20px;
+            }
 
-        .dashboard-heading {
-            flex: 25%;
-            background-color: #007bff; /* Adjust the background color */
-            color: white; /* Adjust the text color */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .dashboard-heading h1 {
-        font-size: 50px; /* You can adjust the font size as needed */
-    }
+            .date-time-card {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="dashboard-container">
+            <div class="dashboard-heading">
+                <h1>Welcome, {{ userData|| 'User' }}!</h1>
+            </div>
+            <main class="main-content">
+                <div class="actions-heading">Actions :</div>
+                <br>
+                <div class="button-container">
+                
+                    <button class="icon-button"[routerLink]="['/Signup']" >
+                        <img src="assets/add-friend.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                        Add Site user
+                    </button>
 
-        .main-content {
-            flex: 70%;
-            background-color: #f1f1f1; /* Adjust the background color */
-            padding: 20px;
-        }
+                    <button class="icon-button"[routerLink]="['/Signup']" >
+                        <img src="assets/edit.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                    Add Meal Count
+                    </button>
 
-        .date-time-card {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="dashboard-container">
-        <div class="dashboard-heading">
-            <h1>Dashboard</h1>
-        </div>
-        <main class="main-content">
-            <div class="actions-heading">Actions :</div>
-            <br>
-            <div class="button-container">
-               
-                <button class="icon-button"[routerLink]="['/Signup']" >
-                    <img src="assets/add-friend.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                    Add Site user
-                  </button>
+                    <button class="icon-button"[routerLink]="['/SiteUserDashboard']" >
+                        <img src="assets/home-button.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                    Home
+                    </button>
 
-                  <button class="icon-button"[routerLink]="['/Signup']" >
-                    <img src="assets/edit.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                   Add Meal Count
-                  </button>
+                    <button class="icon-button"[routerLink]="['/Signup']" >
+                        <img src="assets/settings.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                    Settings
+                    </button>
+                    
+                </div>
+                
 
-                  <button class="icon-button"[routerLink]="['/Signup']" >
-                    <img src="assets/home-button.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                   Home
-                  </button>
+                <div class="mat-card-container">
+                    <mat-card class="mat-card">
+                    <mat-card-content>
+                        <div class="mat-card-content-container">
+                        <img src="assets/time.png" alt="Profile Pic" class="mat-card-image">
+                        <div class="mat-card-text">
+                            <div class="date-time-text">
+                                <div class="date"><h4>{{ currentDate | date:'mediumDate' }}</h4></div>
+                                <div class="time"><h4>{{ currentTime | date:'shortTime' }}</h4></div>
+                            </div>
+                            <!-- <h3>Title goes here</h3>
+                            <p>Secondary text</p> -->
+                        </div>
+                        </div>
+                    </mat-card-content>
+                    <!-- <mat-card-actions>
+                        <button mat-button color="primary">Primary</button>
+                        <button mat-button color="accent">Action</button>
+                    </mat-card-actions> -->
+                    </mat-card>
+                </div>
 
-                  <button class="icon-button"[routerLink]="['/Signup']" >
-                    <img src="assets/settings.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                   Settings
-                  </button>
-                 
-              </div>
-               
+                <div class="example-header">
+                    <!-- <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 
-              <div class="mat-card-container">
-                <mat-card class="mat-card">
-                  <mat-card-content>
-                    <div class="mat-card-content-container">
-                      <img src="assets/time.png" alt="Profile Pic" class="mat-card-image">
-                      <div class="mat-card-text">
-                        <div class="date-time-text">
-                            <div class="date"><h4>{{ currentDate | date:'mediumDate' }}</h4></div>
-                            <div class="time"><h4>{{ currentTime | date:'shortTime' }}</h4></div>
-                          </div>
-                        <!-- <h3>Title goes here</h3>
-                        <p>Secondary text</p> -->
-                      </div>
-                    </div>
-                  </mat-card-content>
-                  <!-- <mat-card-actions>
-                    <button mat-button color="primary">Primary</button>
-                    <button mat-button color="accent">Action</button>
-                  </mat-card-actions> -->
-                </mat-card>
-              </div>
-              
-              
+                    </mat-form-field> -->
+                  </div>
+                  
+                  <div class="example-container mat-elevation-z8">
+                    <mat-table [dataSource]="dataSource" matSort>
+                      <!-- Define table columns here -->
+                      <ng-container matColumnDef="username">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.username}} </mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="mealDate">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Meal Date </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.mealDate}} </mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="mealType">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Meal Type </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.mealType}} </mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="program">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Program </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.program}} </mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="mealCount">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Meal Count </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.mealCount}} </mat-cell>
+                      </ng-container>
+                  
+                      <ng-container matColumnDef="comment">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Comment </mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.comment}} </mat-cell>
+                      </ng-container>
+                  
+                      <!-- Define the rest of your columns here -->
+                  
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                  
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                  </div>
+                  
+                
+                
             
-             
-           
-              
-              
-        </main>
-    </div>
-</body>
-</html>
+                
+                
+            </main>
+        </div>
+    </body>
+    </html>

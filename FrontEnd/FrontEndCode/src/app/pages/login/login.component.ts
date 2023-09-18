@@ -2,7 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient ,HttpHeaders } from '@angular/common/http';
 
-
+import { UserDataService } from 'src/app/services/user-data.service';
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -12,7 +12,8 @@ import {Router} from '@angular/router';
 export class LoginComponent {
   username: string = '';
   password: string= '';
-  constructor(private http: HttpClient,private router: Router) { }
+  userData: any;
+  constructor(private http: HttpClient,private router: Router,private userDataService: UserDataService) { }
 
   
 
@@ -34,7 +35,8 @@ export class LoginComponent {
   (response) => {
     if (response.statusCode === '200') {
       console.log(response.statusCode);
-      // Login successful, navigate to Dashboard
+      this.userDataService.setUserData(response.username);
+      
       this.router.navigate(['Dashboard']);
     } else {
       console.log('Login failed:11', response.statusCode)
@@ -51,6 +53,48 @@ export class LoginComponent {
     }
   }
   
+
+loginSiteuser() : void
+{
+  if (this.username && this.password) {
+    const signInRequest = {
+      username: this.username,
+      password: this.password
+    };
+
+    // Define HTTP headers if needed, e.g., for content type
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    this.http.post<any>('http://localhost:8080/OFS/siteuser/signIn', signInRequest, { headers }).subscribe(
+(response) => {
+  if (response.statusCode === '200') {
+    console.log(response.statusCode);
+    this.userDataService.setUserData(response.username);
+    
+    this.router.navigate(['SiteUserDashboard']);
+  } else {
+    console.log('Login failed:11', response.statusCode)
+    console.error('Login failed:', response);
+    alert('Invalid username or password.');
+  }
+},
+(error) => {
+  console.error('Error while signing in:', error);
+  alert('Error during sign-in. Please try again later.');
+}
+);
+
+  }
+
+}
+
+
+
+
+
+
   // loginForm: FormGroup;
   // submitted = false;
   // error = '';

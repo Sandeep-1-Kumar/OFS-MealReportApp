@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router ,ActivatedRoute} from '@angular/router';
 
-
+import { MatSort } from '@angular/material/sort';
 import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
@@ -12,10 +12,11 @@ import { UserDataService } from 'src/app/services/user-data.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   currentDate: Date = new Date();
   currentTime: Date = new Date();
   userData: { username: string, id: number } = { username: '', id: 0 };
+  @ViewChild(MatSort, { static: false }) sort: MatSort | undefined;
 
   displayedColumns = ['username', 'mealDate', 'mealType', 'program', 'mealCount', 'comment'];
   dataSource = new MatTableDataSource<MealCount>([]);
@@ -31,9 +32,12 @@ export class DashboardComponent {
 
   
   ngOnInit(): void {
-  console.log(this.userData.username);
+    
+    if (this.sort) {
+      this.dataSource.sort = this.sort;
+    }
   this.userData = this.userDataService.getUserData();
-    console.log(this.userData.username);
+   
 
     setInterval(() => {
       this.currentTime = new Date();
@@ -63,9 +67,5 @@ export interface MealCount {
   comment: string;
 }
 
-const MEAL_COUNT_DATA: MealCount[] = [
-  { username: 'John', mealDate: '2023-09-14', mealType: 'Breakfast', program: 'Program A', mealCount: 2, comment: 'No special requests' },
-  { username: 'Alice', mealDate: '2023-09-14', mealType: 'Lunch', program: 'Program B', mealCount: 1, comment: 'Vegetarian' },
-  // Add more data as needed
-];
+
 

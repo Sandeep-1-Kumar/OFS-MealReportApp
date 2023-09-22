@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
 import { 
 	IgxButtonModule,
 	IgxIconModule,
@@ -38,6 +39,7 @@ import { SuccessDialogComponent } from './services/success-dialog/success-dialog
   imports: [
     BrowserModule,
     MatDividerModule,
+    MatSortModule,
     MatPaginatorModule,
     MatCardModule,
     AppRoutingModule,

@@ -46,13 +46,133 @@
                 <!-- Meal Service Time Fields -->
                 <!-- ... Time picker fields ... -->
               <!-- Breakfast Time Field -->
+              <!-- Breakfast Time Field -->
+<div class="form-group">
+  <label class="bold-label" for="breakfastTime">Breakfast Time:</label>
+  <div class="timepicker">
+    <!-- Start Time -->
+    <input
+      #breakfastStartTimeInput
+      type="text"
+      placeholder="Select Start Time"
+      aria-label="Breakfast Start Time"
+      [ngxTimepicker]="breakfastStartTimepicker"
+      readonly
+      formControlName="breakfastStartTime"
+    >
+    <ngx-material-timepicker #breakfastStartTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+    
+    <!-- End Time -->
+    <input
+      #breakfastEndTimeInput
+      type="text"
+      placeholder="Select End Time"
+      aria-label="Breakfast End Time"
+      [ngxTimepicker]="breakfastEndTimepicker"
+      readonly
+      formControlName="breakfastEndTime"
+    >
+    <ngx-material-timepicker #breakfastEndTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+  </div>
+</div>
+
+<!-- Lunch Time Field -->
+<div class="form-group">
+  <label class="bold-label" for="lunchTime">Lunch Time:</label>
+  <div class="timepicker">
+    <!-- Start Time -->
+    <input
+      #lunchStartTimeInput
+      type="text"
+      placeholder="Select Start Time"
+      aria-label="Lunch Start Time"
+      [ngxTimepicker]="lunchStartTimepicker"
+      readonly
+      formControlName="lunchStartTime"
+    >
+    <ngx-material-timepicker #lunchStartTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+    
+    <!-- End Time -->
+    <input
+      #lunchEndTimeInput
+      type="text"
+      placeholder="Select End Time"
+      aria-label="Lunch End Time"
+      [ngxTimepicker]="lunchEndTimepicker"
+      readonly
+      formControlName="lunchEndTime"
+    >
+    <ngx-material-timepicker #lunchEndTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+  </div>
+</div>
+
+<!-- Supper Time Field -->
+<div class="form-group">
+  <label class="bold-label" for="supperTime">Supper Time:</label>
+  <div class="timepicker">
+    <!-- Start Time -->
+    <input
+      #supperStartTimeInput
+      type="text"
+      placeholder="Select Start Time"
+      aria-label="Supper Start Time"
+      [ngxTimepicker]="supperStartTimepicker"
+      readonly
+      formControlName="supperStartTime"
+    >
+    <ngx-material-timepicker #supperStartTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+    
+    <!-- End Time -->
+    <input
+      #supperEndTimeInput
+      type="text"
+      placeholder="Select End Time"
+      aria-label="Supper End Time"
+      [ngxTimepicker]="supperEndTimepicker"
+      readonly
+      formControlName="supperEndTime"
+    >
+    <ngx-material-timepicker #supperEndTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+  </div>
+</div>
+
+<!-- Snack Time Field -->
+<div class="form-group">
+  <label class="bold-label" for="snackTime">Snack Time:</label>
+  <div class="timepicker">
+    <!-- Start Time -->
+    <input
+      #snackStartTimeInput
+      type="text"
+      placeholder="Select Start Time"
+      aria-label="Snack Start Time"
+      [ngxTimepicker]="snackStartTimepicker"
+      readonly
+      formControlName="snackStartTime"
+    >
+    <ngx-material-timepicker #snackStartTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+    
+    <!-- End Time -->
+    <input
+      #snackEndTimeInput
+      type="text"
+      placeholder="Select End Time"
+      aria-label="Snack End Time"
+      [ngxTimepicker]="snackEndTimepicker"
+      readonly
+      formControlName="snackEndTime"
+    >
+    <ngx-material-timepicker #snackEndTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+  </div>
+</div>
+<!-- 
 <div class="form-group">
     <label class="bold-label" for="breakfastTime">Breakfast Time:</label>
     <div class="timepicker">
       <input
         #breakfastTimeInput
         type="text"
-        placeholder="Select Time"
+        placeholder="Select Start Time"
         aria-label="Breakfast Time"
         [ngxTimepicker]="breakfastTimepicker"
         readonly
@@ -62,13 +182,13 @@
     </div>
   </div>
   
-  <!-- Lunch Time Field -->
+
   <div class="form-group">
     <label class="bold-label" for="lunchTime">Lunch Time:</label>
     <div class="timepicker">
       <input
         type="text"
-        placeholder="Select Time"
+        placeholder="Select Start Time"
         aria-label="Lunch Time"
         [ngxTimepicker]="lunchTimepicker"
         readonly
@@ -78,13 +198,13 @@
     </div>
   </div>
   
-  <!-- Supper Time Field -->
+
   <div class="form-group">
     <label class="bold-label" for="supperTime">Supper Time:</label>
     <div class="timepicker">
       <input
         type="text"
-        placeholder="Select Time"
+        placeholder="Select Start Time"
         aria-label="Supper Time"
         [ngxTimepicker]="supperTimepicker"
         readonly
@@ -94,13 +214,13 @@
     </div>
   </div>
   
-  <!-- Snack Time Field -->
+ 
   <div class="form-group">
     <label class="bold-label" for="snackTime">Snack Time:</label>
     <div class="timepicker">
       <input
         type="text"
-        placeholder="Select Time"
+        placeholder="Select Start Time"
         aria-label="Snack Time"
         [ngxTimepicker]="snackTimepicker"
         readonly
@@ -108,7 +228,7 @@
       >
       <ngx-material-timepicker #snackTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
     </div>
-  </div>
+  </div> -->
   <!-- Meal Days Field -->
 <div class="form-group meal-days-box">
     <label class="bold-label">Meal Days:</label>

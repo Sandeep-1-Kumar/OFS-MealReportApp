@@ -35,7 +35,13 @@ export class LoginComponent {
   (response) => {
     if (response.statusCode === '200') {
       console.log(response.statusCode);
-      this.userDataService.setUserData(response.username);
+      console.log(response.username);
+      console.log(response.id);
+      this.userDataService.setUserData({
+        username: response.username,
+        id: response.id
+      });
+      
       
       this.router.navigate(['Dashboard']);
     } else {
@@ -71,8 +77,11 @@ loginSiteuser() : void
 (response) => {
   if (response.statusCode === '200') {
     console.log(response.statusCode);
-    this.userDataService.setUserData(response.username);
-    
+    this.userDataService.setUserData({
+      username: response.username,
+      id: response.id
+    });
+    console.log(this.userData);
     this.router.navigate(['SiteUserDashboard']);
   } else {
     console.log('Login failed:11', response.statusCode)

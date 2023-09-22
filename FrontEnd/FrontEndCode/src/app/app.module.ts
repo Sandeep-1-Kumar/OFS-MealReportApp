@@ -16,7 +16,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { 
 	IgxButtonModule,
 	IgxIconModule,
@@ -25,13 +25,15 @@ import {
  } from "igniteui-angular";
  import {MatDividerModule} from '@angular/material/divider';
 import { SiteuserDashboardComponent } from './pages/siteuser-dashboard/siteuser-dashboard.component';
+import { SuccessDialogComponent } from './services/success-dialog/success-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
     SignupSiteuserComponent,
-    SiteuserDashboardComponent
+    SiteuserDashboardComponent,
+    SuccessDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { SiteuserDashboardComponent } from './pages/siteuser-dashboard/siteuser-
     MatCardModule,
     AppRoutingModule,
     MatTableModule,
+    MatDialogModule,
     HttpClientModule,
     FormsModule,
     MatIconModule,

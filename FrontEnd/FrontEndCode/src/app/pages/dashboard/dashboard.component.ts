@@ -15,7 +15,8 @@ import { UserDataService } from 'src/app/services/user-data.service';
 export class DashboardComponent {
   currentDate: Date = new Date();
   currentTime: Date = new Date();
-  userData: string='';
+  userData: { username: string, id: number } = { username: '', id: 0 };
+
   displayedColumns = ['username', 'mealDate', 'mealType', 'program', 'mealCount', 'comment'];
   dataSource = new MatTableDataSource<MealCount>([]);
   constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private userDataService: UserDataService) {}
@@ -30,7 +31,10 @@ export class DashboardComponent {
 
   
   ngOnInit(): void {
-  
+  console.log(this.userData.username);
+  this.userData = this.userDataService.getUserData();
+    console.log(this.userData.username);
+
     setInterval(() => {
       this.currentTime = new Date();
     }, 1000);

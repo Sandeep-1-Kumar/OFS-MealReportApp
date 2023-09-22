@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class UserDataService {
-  private userData: string='';
+  private userData: { username: string, id: number } = { username: '', id: 0 };
 
-  setUserData(userData: any) {
+  setUserData(userData: { username: string, id: number }) {
     this.userData = userData;
   }
   getUserData() {

@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient ,HttpHeaders } from '@angular/common/http';
 import {Router} from '@angular/router';
 import { NgxMaterialTimepickerComponent } from 'ngx-material-timepicker';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SuccessDialogComponent } from 'src/app/services/success-dialog/success-dialog.component';
+
+import { UserDataService } from 'src/app/services/user-data.service';
 @Component({
   selector: 'app-signup-siteuser',
   templateUrl: './signup-siteuser.component.html',
@@ -10,7 +14,7 @@ import { NgxMaterialTimepickerComponent } from 'ngx-material-timepicker';
 })
 export class SignupSiteuserComponent {
 // Initialize with an empty FormGroup
-
+userData: { username: string, id: number } = { username: '', id: 0 };
     //time: { hour: number, minute: number } = { hour: 12, minute: 0 }; // Define the time variable
     registrationForm!: FormGroup;
     breakfastTime: string='1:06 AM';
@@ -26,7 +30,7 @@ export class SignupSiteuserComponent {
       sat: 'Saturday',
       sun: 'Sunday',
     };
-    constructor(private fb: FormBuilder,private http: HttpClient,private router: Router) {
+    constructor(private fb: FormBuilder,private http: HttpClient,private router: Router,public dialog: MatDialog,private userDataService: UserDataService) {
       // Initialize time properties
       this.breakfastTime = '';
       this.lunchTime = '';
@@ -58,6 +62,7 @@ export class SignupSiteuserComponent {
 
 
   ngOnInit(): void {
+    this.userData = this.userDataService.getUserData();
     this.registrationForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -65,10 +70,14 @@ export class SignupSiteuserComponent {
       siteName: ['', Validators.required],
       siteSupervisor: ['', Validators.required],
       siteAddress: ['', Validators.required],
-      breakfastTime: [''],
-      lunchTime: [''],
-      supperTime: [''],
-      snackTime: [''],
+      breakfastStartTime: [''],
+      breakfastEndTime: [''],
+      lunchStartTime: [''],
+      lunchEndTime: [''],
+      supperStartTime: [''],
+      supperEndTime: [''],
+      snackStartTime: [''],
+      snackEndTime: [''],
       mealDays: [''],
       Monday: [false], // Initialize with 'false' if not selected
     Tuesday: [false],
@@ -97,20 +106,18 @@ export class SignupSiteuserComponent {
         siteName: this.registrationForm.get('siteName')?.value || '',
         siteSupervisor: this.registrationForm.get('siteSupervisor')?.value || '',
         siteAddress: this.registrationForm.get('siteAddress')?.value || '',
-        breakfastTime: this.stripAmPm(this.registrationForm.get('breakfastTime')?.value) || '',
-        lunchTime: this.stripAmPm(this.registrationForm.get('lunchTime')?.value) || '',
-        supperTime: this.stripAmPm(this.registrationForm.get('supperTime')?.value) || '',
-        snackTime: this.stripAmPm(this.registrationForm.get('snackTime')?.value) || '',
+        breakfastStartTime: this.stripAmPm(this.registrationForm.get('breakfastStartTime')?.value) || '',
+        breakfastEndTime: this.stripAmPm(this.registrationForm.get('breakfastEndTime')?.value) || '',
+        lunchStartTime: this.stripAmPm(this.registrationForm.get('lunchStartTime')?.value) || '',
+        lunchEndTime: this.stripAmPm(this.registrationForm.get('lunchEndTime')?.value) || '',
+        supperStartTime: this.stripAmPm(this.registrationForm.get('supperStartTime')?.value) || '',
+        supperEndTime: this.stripAmPm(this.registrationForm.get('supperEndTime')?.value) || '',
+        snackStartTime: this.stripAmPm(this.registrationForm.get('snackStartTime')?.value) || '',
+        snackEndTime: this.stripAmPm(this.registrationForm.get('snackEndTime')?.value) || '',
         
         mealDays: this.registrationForm.get('mealDays')?.value || '',
-        adminid: 2
-        // mon: this.registrationForm.get('mon')?.value || false,
-        // tue: this.registrationForm.get('tue')?.value || false,
-        // wed: this.registrationForm.get('wed')?.value || false,
-        // thu: this.registrationForm.get('thu')?.value || false,
-        // fri: this.registrationForm.get('fri')?.value || false,
-        // sat: this.registrationForm.get('sat')?.value || false,
-        // sun: this.registrationForm.get('sun')?.value || false,
+        adminid: this.userData.id
+        
       };
       console.log('Submitted Data:', customFormData);
       this.http.post('http://localhost:8080/OFS/siteuser/create', customFormData).subscribe(
@@ -121,6 +128,14 @@ export class SignupSiteuserComponent {
       console.error('Error:', error);
     }
   );
+  const dialogRef = this.dialog.open(SuccessDialogComponent, {
+    width: '250px', // Adjust the width as needed
+  });
+
+  // Handle dialog close event (optional)
+  dialogRef.afterClosed().subscribe((result) => {
+    console.log('The dialog was closed');
+  });
     }
     stripAmPm(timeValue: string): string {
       // Remove "AM" or "PM" from the time value
@@ -130,26 +145,6 @@ export class SignupSiteuserComponent {
       return '';
     }
     
-    // onSubmit() {
-      
-    //   const selectedDays = Object.keys(this.selectedDays).filter(day => this.selectedDays[day]);
-    //   this.formData.mealDays = selectedDays.join(', ');
     
-    //   // Log the updated form data
-    //   const submittedData = {
-    //     username: this.formData.username,
-    //     password: this.formData.password,
-    //     email: this.formData.email,
-    //     siteName: this.formData.siteName,
-    //     siteSupervisor: this.formData.siteSupervisor,
-    //     siteAddress: this.formData.siteAddress,
-    //     breakfastTime: this.formData.breakfastTime,
-    //     lunchTime: this.formData.lunchTime,
-    //     supperTime: this.formData.supperTime,
-    //     snackTime: this.formData.snackTime,
-    //     mealDays: this.formData.mealDays,
-    //   };
-    //   console.log('Form data submitted:', submittedData);
-    // }
     
 }

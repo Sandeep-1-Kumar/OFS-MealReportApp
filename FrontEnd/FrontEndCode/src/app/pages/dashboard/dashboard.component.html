@@ -46,7 +46,11 @@
     <body>
         <div class="dashboard-container">
             <div class="dashboard-heading">
-                <h1>Welcome, {{ userData|| 'User' }}!</h1>
+                <h1>Welcome,  {{userData.username}}</h1>
+                
+                <!-- (ID: {{ userData.id || 'N/A' }})!</h1> -->
+
+
             </div>
             <main class="main-content">
                 <div class="actions-heading">Actions :</div>
@@ -58,10 +62,10 @@
                         Add Site user
                     </button>
 
-                    <button class="icon-button"[routerLink]="['/Signup']" >
+                    <!-- <button class="icon-button"[routerLink]="['/Signup']" >
                         <img src="assets/edit.png" alt="Button Image" style="width: 100px; height: 100px;"> 
                     Add Meal Count
-                    </button>
+                    </button> -->
 
                     <button class="icon-button"[routerLink]="['/SiteUserDashboard']" >
                         <img src="assets/home-button.png" alt="Button Image" style="width: 100px; height: 100px;"> 

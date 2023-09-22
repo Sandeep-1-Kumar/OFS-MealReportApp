@@ -11,7 +11,8 @@ import { UserDataService } from 'src/app/services/user-data.service';
 export class SiteuserDashboardComponent {
   currentDate: Date = new Date();
   currentTime: Date = new Date();
-  userData: string='';
+  userData: { username: string, id: number } = { username: '', id: 0 };
+
   constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private userDataService: UserDataService) {}
   ngOnInit(): void {
     // Update the time every second

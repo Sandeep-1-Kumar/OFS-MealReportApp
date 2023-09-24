@@ -147,9 +147,13 @@ public @ResponseBody AuthorizationResponseJson createSiteUsers(@RequestBody Site
         siteusers.setSitesupervisor(siteUserRequestJson.getSiteSupervisor());
         siteusers.setSiteaddress(siteUserRequestJson.getSiteAddress());
         siteusers.setBreakfasttime(siteUserRequestJson.getBreakfastTime());
+        siteusers.setBreakfastendtime(siteUserRequestJson.getBreakfastEndTime());
         siteusers.setLunchtime(siteUserRequestJson.getLunchTime());
+        siteusers.setLunchendtime(siteUserRequestJson.getLunchEndTime());
         siteusers.setSuppertime(siteUserRequestJson.getSupperTime());
+        siteusers.setSupperendtime(siteUserRequestJson.getSupperEndTime());
         siteusers.setSnacktime(siteUserRequestJson.getSnackTime());
+        siteusers.setSnackendtime(siteUserRequestJson.getSnackEndTime());
         siteusers.setMealdays(siteUserRequestJson.getMealDays());
         Optional<Admins> adminsOptional = adminRepository.findById(Long.parseLong(siteUserRequestJson.getAdminid()));
         if (adminsOptional.isPresent()) {

@@ -9,12 +9,40 @@ public class SiteUserRequestJson {
     private String siteSupervisor;
     private String siteAddress;
     private String breakfastTime;
+    public String getBreakfastEndTime() {
+        return breakfastEndTime;
+    }
+    public void setBreakfastEndTime(String breakfastEndTime) {
+        this.breakfastEndTime = breakfastEndTime;
+    }
+    public String getLunchEndTime() {
+        return lunchEndTime;
+    }
+    public void setLunchEndTime(String lunchEndTime) {
+        this.lunchEndTime = lunchEndTime;
+    }
+    public String getSupperEndTime() {
+        return supperEndTime;
+    }
+    public void setSupperEndTime(String supperEndTime) {
+        this.supperEndTime = supperEndTime;
+    }
+    public String getSnackEndTime() {
+        return snackEndTime;
+    }
+    public void setSnackEndTime(String snackEndTime) {
+        this.snackEndTime = snackEndTime;
+    }
+    private String breakfastEndTime;
     private String lunchTime;
+    private String lunchEndTime;
     private String supperTime;
+    private String supperEndTime;
     private String snackTime;
+    private String snackEndTime;
     private String mealDays;
     private String adminid;
-
+    
 
     public String getUsername() {
         return username;

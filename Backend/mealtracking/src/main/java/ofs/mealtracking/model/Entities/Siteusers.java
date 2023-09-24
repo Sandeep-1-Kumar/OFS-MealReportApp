@@ -99,11 +99,55 @@ public class Siteusers {
     @Column(columnDefinition = "TIME")
     private String breakfasttime;
     @Column(columnDefinition = "TIME")
+    private String breakfastendtime;
+
+    @Column(columnDefinition = "TIME")
     private String lunchtime;
+    @Column(columnDefinition = "TIME")
+    private String lunchendtime;
+
+
+    public String getBreakfastendtime() {
+        return breakfastendtime;
+    }
+
+    public void setBreakfastendtime(String breakfastendtime) {
+        this.breakfastendtime = breakfastendtime;
+    }
+
+    public String getLunchendtime() {
+        return lunchendtime;
+    }
+
+    public void setLunchendtime(String lunchendtime) {
+        this.lunchendtime = lunchendtime;
+    }
+
+    public String getSupperendtime() {
+        return supperendtime;
+    }
+
+    public void setSupperendtime(String supperendtime) {
+        this.supperendtime = supperendtime;
+    }
+
+    public String getSnackendtime() {
+        return snackendtime;
+    }
+
+    public void setSnackendtime(String snackendtime) {
+        this.snackendtime = snackendtime;
+    }
+
     @Column(columnDefinition = "TIME")
     private String suppertime;
     @Column(columnDefinition = "TIME")
+    private String supperendtime;
+    
+    @Column(columnDefinition = "TIME")
     private String snacktime;
+    @Column(columnDefinition = "TIME")
+    private String snackendtime;
 
     private String mealdays;
 

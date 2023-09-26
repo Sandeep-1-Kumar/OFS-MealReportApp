@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+
 import ofs.mealtracking.model.Entities.Mealcount;
 import ofs.mealtracking.model.Entities.Siteusers;
 import ofs.mealtracking.model.Requests.MealCountRequestJson;
@@ -135,7 +138,6 @@ public List<Map<String, Object>> adminGetMealCounts(
     try {
         String tableName = "mealcount";
         String query = "SELECT * FROM " + tableName + " WHERE 1=1";
-        
         if (siteUserId != null && !siteUserId.isEmpty()) {
             query += " AND siteuserid = :siteUserId";
         }
@@ -176,16 +178,21 @@ public List<Map<String, Object>> adminGetMealCounts(
         for (Object[] row : results) {
             Map<String, Object> responseMap = new HashMap<>();
             responseMap.put("id", row[0]);
+            Long id = Long.parseLong(row[1].toString());
+            Optional<Siteusers> siteOptional = siteusersRepository.findById(id);
+            String userName = siteOptional.get().getUsername();
             responseMap.put("siteuserid", row[1]);
+            responseMap.put("siteUserName",userName );
             responseMap.put("mealdate", row[2]);
             responseMap.put("mealtype", row[3]);
             responseMap.put("program", row[4]);
             responseMap.put("mealcount", row[5]);
-            responseMap.put("comment", row[6]);
+            responseMap.put("comment", row[6] != null ? row[6] : "");
             responseList.add(responseMap);
         }
         return responseList;
     } catch (Exception e) {
+        e.printStackTrace();
         return new ArrayList<>();
     }
 }

@@ -1,7 +1,5 @@
 package ofs.mealtracking.controller;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +18,7 @@ import ofs.mealtracking.repositories.MealCountRepository;
 import ofs.mealtracking.repositories.SiteusersRepository;
 
 
-import java.text.SimpleDateFormat;
+
 import java.util.*;
 
 import javax.persistence.EntityManager;
@@ -126,41 +124,7 @@ updateMealCount(@PathVariable Long mealCountId, @RequestBody MealCountRequestJso
     return mealOperationsResponseJson;
 }
 
- @GetMapping(path = "/dummy/getMealCounts")
-    public @ResponseBody List<Mealcount> DummygetMealCounts(
-        @RequestParam(required = false) String site,
-        @RequestParam(required = false) String date,
-        @RequestParam(required = false) String mealType,
-        @RequestParam(required = false) String program
-    ) {
-        try 
-        {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date utilDate = dateFormat.parse(date);
-            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-            Mealcount mealCount = new Mealcount();
-            mealCount.setSiteuser(new Siteusers());
-            mealCount.setMealDate(sqlDate);
-            mealCount.setMealType(mealType);
-            mealCount.setProgram(program);
-            System.out.println(sqlDate);
-            System.out.println(mealType);
-            System.out.println(program);
-            ExampleMatcher matcher = ExampleMatcher.matching()
-                .withMatcher("mealdate", ExampleMatcher.GenericPropertyMatchers.exact())
-                .withMatcher("mealtype", ExampleMatcher.GenericPropertyMatchers.exact())
-                .withMatcher("program", ExampleMatcher.GenericPropertyMatchers.exact());
-            Example<Mealcount> example = Example.of(mealCount, matcher);
-            List<Mealcount> filteredMealCounts = mealCountRepository.findAll(example);
-            return filteredMealCounts;
-        } catch (Exception e) {
-            System.out.println("error");
-            System.out.println(e.getMessage());
-            return new ArrayList<>();
-        }
-        
-    }
-    @GetMapping(path = "/admin/getMealCounts")
+@GetMapping(path = "/admin/getMealCounts")
 @SuppressWarnings("unchecked")
 public List<Map<String, Object>> adminGetMealCounts(
     @RequestParam(required = false) String siteUserId,

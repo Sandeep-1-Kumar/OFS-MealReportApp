@@ -25,9 +25,16 @@
   max-height: 500px;
 }
 
+/* Add this CSS to your component's style or a global stylesheet */
+.mat-header-cell {
+  background-color: black; /* Change the background color to black */
+  color: white; /* Change the text color to white */
+}
 
-
-
+.mat-header-row {
+  background-color: black; /* Change the background color to black */
+  color: white; /* Change the text color to white */
+}
 
 
 
@@ -196,3 +203,24 @@ button {
   padding: 5px; /* Add padding to create space around the text */
 }
 
+.mat-header-row {
+  background-color: black; /* Change the background color to black */
+  color: white; /* Change the text color to white */
+}
+th.mat-header-cell {
+  color: red;
+  background-color: black;
+}
+
+.custom-filter-container {
+  width: 100%; /* Set the desired width (e.g., 100% for full width) */
+  display: flex;
+  justify-content: space-between; /* Adjust alignment as needed */
+}
+
+/* Increase the header cell height with more specific selector */
+/* Use !important to force the custom styles */
+table.mat-table.custom-table th.mat-header-cell {
+  height: 60px !important;
+  line-height: 60px !important;
+}

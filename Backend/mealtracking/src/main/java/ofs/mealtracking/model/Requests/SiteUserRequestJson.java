@@ -9,6 +9,7 @@ public class SiteUserRequestJson {
     private String siteSupervisor;
     private String siteAddress;
     private String breakfastTime;
+
     public String getBreakfastEndTime() {
         return breakfastEndTime;
     }

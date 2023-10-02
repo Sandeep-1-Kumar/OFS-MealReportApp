@@ -12,7 +12,6 @@ import java.util.Optional;
 public interface MealCountRepository extends CrudRepository<Mealcount,Long> {
 
    Optional<Mealcount> findById(Long id);
-
-List<Mealcount> findAll(Example<Mealcount> example);
+   List<Mealcount> findAll(Example<Mealcount> example);
     
 }

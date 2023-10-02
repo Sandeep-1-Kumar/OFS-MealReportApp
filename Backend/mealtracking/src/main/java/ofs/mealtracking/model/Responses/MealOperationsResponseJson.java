@@ -3,6 +3,13 @@ package ofs.mealtracking.model.Responses;
 public class MealOperationsResponseJson {
     private String statusCode;
     private String statusMessage;
+    private String mealId;
+    public String getMealId() {
+        return mealId;
+    }
+    public void setMealId(String mealId) {
+        this.mealId = mealId;
+    }
     public String getStatusCode() {
         return statusCode;
     }

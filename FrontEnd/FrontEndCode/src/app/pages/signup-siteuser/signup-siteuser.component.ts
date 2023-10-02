@@ -17,10 +17,7 @@ export class SignupSiteuserComponent {
 userData: { username: string, id: number } = { username: '', id: 0 };
     //time: { hour: number, minute: number } = { hour: 12, minute: 0 }; // Define the time variable
     registrationForm!: FormGroup;
-    breakfastTime: string='1:06 AM';
-    lunchTime: string;
-    supperTime: string;
-    snackTime: string;
+    
     dayMapping: { [key: string]: string } = {
       mon: 'Monday',
       tue: 'Tuesday',
@@ -32,10 +29,7 @@ userData: { username: string, id: number } = { username: '', id: 0 };
     };
     constructor(private fb: FormBuilder,private http: HttpClient,private router: Router,public dialog: MatDialog,private userDataService: UserDataService) {
       // Initialize time properties
-      this.breakfastTime = '';
-      this.lunchTime = '';
-      this.supperTime = '';
-      this.snackTime = '';
+      
     }
   
     @ViewChild('breakfastTimepicker') breakfastTimepicker!: NgxMaterialTimepickerComponent;
@@ -70,13 +64,13 @@ userData: { username: string, id: number } = { username: '', id: 0 };
       siteName: ['', Validators.required],
       siteSupervisor: ['', Validators.required],
       siteAddress: ['', Validators.required],
-      breakfastStartTime: [''],
+      breakfastTime: [''],
       breakfastEndTime: [''],
-      lunchStartTime: [''],
+      lunchTime: [''],
       lunchEndTime: [''],
-      supperStartTime: [''],
+      supperTime: [''],
       supperEndTime: [''],
-      snackStartTime: [''],
+      snackTime: [''],
       snackEndTime: [''],
       mealDays: [''],
       Monday: [false], // Initialize with 'false' if not selected
@@ -106,13 +100,13 @@ userData: { username: string, id: number } = { username: '', id: 0 };
         siteName: this.registrationForm.get('siteName')?.value || '',
         siteSupervisor: this.registrationForm.get('siteSupervisor')?.value || '',
         siteAddress: this.registrationForm.get('siteAddress')?.value || '',
-        breakfastStartTime: this.stripAmPm(this.registrationForm.get('breakfastStartTime')?.value) || '',
+        breakfastTime: this.stripAmPm(this.registrationForm.get('breakfastTime')?.value) || '',
         breakfastEndTime: this.stripAmPm(this.registrationForm.get('breakfastEndTime')?.value) || '',
-        lunchStartTime: this.stripAmPm(this.registrationForm.get('lunchStartTime')?.value) || '',
+        lunchTime: this.stripAmPm(this.registrationForm.get('lunchTime')?.value) || '',
         lunchEndTime: this.stripAmPm(this.registrationForm.get('lunchEndTime')?.value) || '',
-        supperStartTime: this.stripAmPm(this.registrationForm.get('supperStartTime')?.value) || '',
+        supperTime: this.stripAmPm(this.registrationForm.get('supperTime')?.value) || '',
         supperEndTime: this.stripAmPm(this.registrationForm.get('supperEndTime')?.value) || '',
-        snackStartTime: this.stripAmPm(this.registrationForm.get('snackStartTime')?.value) || '',
+        snackTime: this.stripAmPm(this.registrationForm.get('snackTime')?.value) || '',
         snackEndTime: this.stripAmPm(this.registrationForm.get('snackEndTime')?.value) || '',
         
         mealDays: this.registrationForm.get('mealDays')?.value || '',

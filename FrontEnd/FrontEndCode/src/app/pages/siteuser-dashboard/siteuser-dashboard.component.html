@@ -22,7 +22,7 @@
 
         .dashboard-heading {
             flex: 25%;
-            background-color: #007bff; /* Adjust the background color */
+            background-color: #040636; /* Adjust the background color */
             color: white; /* Adjust the text color */
             display: flex;
             justify-content: center;
@@ -46,7 +46,7 @@
 <body>
     <div class="dashboard-container">
         <div class="dashboard-heading">
-            <h1 class="dashboard-heading"> Welcome, {{ userData|| 'User' }}!</h1>
+            <h1 class="dashboard-heading"> Welcome, {{ userData.username }}</h1>
         </div>
         <main class="main-content">
             <div class="actions-heading">Actions :</div>
@@ -88,10 +88,6 @@
                       </div>
                     </div>
                   </mat-card-content>
-                  <!-- <mat-card-actions>
-                    <button mat-button color="primary">Primary</button>
-                    <button mat-button color="accent">Action</button>
-                  </mat-card-actions> -->
                 </mat-card>
               </div>
               

@@ -18,6 +18,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 import { 
 	IgxButtonModule,
 	IgxIconModule,
@@ -27,6 +30,12 @@ import {
  import {MatDividerModule} from '@angular/material/divider';
 import { SiteuserDashboardComponent } from './pages/siteuser-dashboard/siteuser-dashboard.component';
 import { SuccessDialogComponent } from './services/success-dialog/success-dialog.component';
+import { EditSiteuserComponent } from './pages/edit-siteuser/edit-siteuser.component';
+import { EditpasswordComponent } from './pages/editpassword/editpassword.component';
+import { AddadminComponent } from './pages/addadmin/addadmin.component';
+import { UpdateadminpasswordComponent } from './pages/updateadminpassword/updateadminpassword.component';
+import { DeleteadminComponent } from './pages/deleteadmin/deleteadmin.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,11 +43,19 @@ import { SuccessDialogComponent } from './services/success-dialog/success-dialog
     DashboardComponent,
     SignupSiteuserComponent,
     SiteuserDashboardComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    EditSiteuserComponent,
+   
+    EditpasswordComponent,
+    AddadminComponent,
+    UpdateadminpasswordComponent,
+    DeleteadminComponent,
   ],
   imports: [
     BrowserModule,
     MatDividerModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
     MatSortModule,
     MatPaginatorModule,
     MatCardModule,

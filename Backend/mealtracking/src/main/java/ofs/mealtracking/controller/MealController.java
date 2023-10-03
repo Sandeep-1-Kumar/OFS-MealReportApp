@@ -80,6 +80,7 @@ addMealsDelivered(@RequestBody AddMealsDeliveredRequestJson addMealsDeliveredReq
         if (siteUser == null) {
             throw new Exception("Site User Not Found for the particular meal count");
         }
+
         Mealcount mealCount = new Mealcount();
         mealCount.setSiteuser(siteUser);
         mealCount.setMealDate(addMealsDeliveredRequestJson.getMealDate());
@@ -352,7 +353,6 @@ public ResponseEntity<Map<String, Object>> submittingMealCount(@PathVariable Lon
 }
 
 
-
 @GetMapping(path = "/admin/getMealCounts")
 @SuppressWarnings("unchecked")
 public List<Map<String, Object>> adminGetMealCounts(
@@ -360,74 +360,91 @@ public List<Map<String, Object>> adminGetMealCounts(
     @RequestParam(required = false) String date,
     @RequestParam(required = false) String status,
     @RequestParam(required = false) String mealType,
-    @RequestParam(required = false) String mealsAvailableFromPreviousDay,
-    @RequestParam(required = false) String mealsDelivered,
-    @RequestParam(required = false) String mealsServed,
-    @RequestParam(required = false) String damagedMeals,
-    @RequestParam(required = false) String expiredMeals,
-    @RequestParam(required = false) String eligibleCarryOverMeals,
+    @RequestParam(required = false) Integer mealsAvailableFromPreviousDay,
+    @RequestParam(required = false) Integer mealsDelivered,
+    @RequestParam(required = false) Integer mealsServed,
+    @RequestParam(required = false) Integer damagedMeals,
+    @RequestParam(required = false) Integer expiredMeals,
+    @RequestParam(required = false) Integer eligibleCarryOverMeals,
     @RequestParam(required = false) String comments
 ) {
     try {
         String mealCountTableName = "mealcount";
-        //String siteUserTableName = "siteusers";
 
+        StringBuilder mealCountQuery = new StringBuilder("SELECT m.id, m.mealdate, m.mealservicestatus, m.mealtype, m.previousdaymeals, m.mealsdelivered, m.mealsserved, m.damagedmeals, m.expiredmeals, m.carryovermeals, m.comment");
+        
+        if (siteName != null && !siteName.isEmpty()) {
+            mealCountQuery.append(", s.sitename FROM " + mealCountTableName +" m " + " INNER JOIN siteusers s ON m.siteuserid = s.id ");
+        }
+        else
+        {
+            mealCountQuery.append(" FROM " + mealCountTableName +" m ");
+        }
 
-        String mealCountQuery = "SELECT id,mealdate,mealtype,mealsdelivered,mealsserved,damagedmeals,expiredMeals,comment FROM "
-        + mealCountTableName + " WHERE 1=1";        
+        mealCountQuery.append(" WHERE 1=1");
+
+        Map<String, Object> queryParams = new HashMap<>();
 
         if (date != null && !date.isEmpty()) {
-            mealCountQuery += " AND mealdate = :date";
+            mealCountQuery.append(" AND m.mealdate = :date");
+            queryParams.put("date", date);
+        }
+
+        if (status != null && !status.isEmpty()) {
+            mealCountQuery.append(" AND m.mealservicestatus = :status");
+            queryParams.put("status", status);
         }
 
         if (mealType != null && !mealType.isEmpty()) {
-            mealCountQuery += " AND mealtype = :mealType";
+            mealCountQuery.append(" AND m.mealtype = :mealType");
+            queryParams.put("mealType", mealType);
         }
 
-        if (mealsDelivered != null && 
-            !mealsDelivered.isEmpty()) {
-            mealCountQuery += " AND mealsdelivered = :mealsDelivered";
+        if (mealsAvailableFromPreviousDay != null) {
+            mealCountQuery.append(" AND m.previousdaymeals = :mealsAvailableFromPreviousDay");
+            queryParams.put("mealsAvailableFromPreviousDay", mealsAvailableFromPreviousDay);
         }
 
-        if (mealsServed != null && 
-            !mealsServed.isEmpty()) {
-            mealCountQuery += " AND mealsserved = :mealsServed";
+        if (mealsDelivered != null) {
+            mealCountQuery.append(" AND m.mealsdelivered = :mealsDelivered");
+            queryParams.put("mealsDelivered", mealsDelivered);
         }
 
-        if (damagedMeals != null && 
-            !damagedMeals.isEmpty()) {
-            mealCountQuery += " AND damagedmeals = :damagedMeals";
-        }
-        if (expiredMeals != null && 
-            !expiredMeals.isEmpty()) {
-            mealCountQuery += " AND expiredmeals = :expiredMeals";
-        }
-        Query nativeQuery = entityManager.createNativeQuery(mealCountQuery);
-
-        if (date != null && !date.isEmpty()) {
-            nativeQuery.setParameter("date", date); 
+        if (mealsServed != null) {
+            mealCountQuery.append(" AND m.mealsserved = :mealsServed");
+            queryParams.put("mealsServed", mealsServed);
         }
 
-        if (mealType != null && !mealType.isEmpty()) {
-            nativeQuery.setParameter("mealType", mealType);
+        if (damagedMeals != null) {
+            mealCountQuery.append(" AND m.damagedmeals = :damagedMeals");
+            queryParams.put("damagedMeals", damagedMeals);
         }
 
-        if (mealsDelivered != null && !mealsDelivered.isEmpty()) {
-            nativeQuery.setParameter("mealsDelivered", mealsDelivered);
+        if (expiredMeals != null) {
+            mealCountQuery.append(" AND m.expiredmeals = :expiredMeals");
+            queryParams.put("expiredMeals", expiredMeals);
         }
 
-        if (mealsServed != null && !mealsServed.isEmpty()) {
-            nativeQuery.setParameter("mealsServed", mealsServed);
+        if (eligibleCarryOverMeals != null) {
+            mealCountQuery.append(" AND m.carryovermeals = :eligibleCarryOverMeals");
+            queryParams.put("eligibleCarryOverMeals", eligibleCarryOverMeals);
         }
 
-        if (damagedMeals != null && !damagedMeals.isEmpty()) {
-            nativeQuery.setParameter("damagedMeals", damagedMeals); 
+        if (comments != null && !comments.isEmpty()) {
+            mealCountQuery.append(" AND m.comment = :comments");
+            queryParams.put("comments", comments);
         }
-
-        if (expiredMeals != null && !expiredMeals.isEmpty()) {
-            nativeQuery.setParameter("expiredMeals", expiredMeals);
+        if (siteName != null && !siteName.isEmpty()) {
+            mealCountQuery.append(" AND s.sitename = :siteName");
+            queryParams.put("siteName", siteName);
         }
+        
+        Query nativeQuery = entityManager.createNativeQuery(mealCountQuery.toString());
 
+        for (Map.Entry<String, Object> entry : queryParams.entrySet()) {
+            nativeQuery.setParameter(entry.getKey(), entry.getValue());
+        }
+        
         List<Object[]> results = nativeQuery.getResultList();
         List<Map<String, Object>> responseList = new ArrayList<>();
 
@@ -435,13 +452,18 @@ public List<Map<String, Object>> adminGetMealCounts(
             Map<String, Object> responseMap = new HashMap<>();
             responseMap.put("id", row[0]);
             responseMap.put("date", row[1]);
-            responseMap.put("mealType", row[2]);
-            responseMap.put("mealsDelivered", row[3]);
-            responseMap.put("mealsServed", row[4]);
-            responseMap.put("mealsDamaged", row[5]);
-            responseMap.put("mealsExpired", row[6]);
-            responseMap.put("comment", row[7]);
-
+            responseMap.put("status", row[2]);
+            responseMap.put("mealType", row[3]);
+            responseMap.put("mealsAvailableFromPreviousDay", row[4]);
+            responseMap.put("mealsDelivered", row[5]);
+            responseMap.put("mealsServed", row[6]);
+            responseMap.put("damagedMeals", row[7]);
+            responseMap.put("expiredMeals", row[8]);
+            responseMap.put("eligibleCarryOverMeals", row[9]);
+            responseMap.put("comment", row[10]);
+            if (siteName != null && !siteName.isEmpty()) {
+                responseMap.put("siteName", row[11]);
+            }
             responseList.add(responseMap);
         }
         return responseList;
@@ -450,7 +472,5 @@ public List<Map<String, Object>> adminGetMealCounts(
         return new ArrayList<>();
     }
 }
-
-
 
 }

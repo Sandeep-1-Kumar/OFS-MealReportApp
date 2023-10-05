@@ -2,10 +2,23 @@ package ofs.mealtracking.model.Requests;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 public class AddMealsDeliveredRequestJson {
     private String username;
-    private Date mealDate;
+    private String mealDate;
+    public Date getMealDate() throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date parsedDate = dateFormat.parse(mealDate);
+        return new java.sql.Date(parsedDate.getTime());
+    }
+
+    public void setMealDate(String mealDate) {
+        this.mealDate = mealDate;
+    }
     private String personName;
     private String mealsDeliveryStatus;
     private int mealsDeliveredCount;
@@ -15,7 +28,7 @@ public class AddMealsDeliveredRequestJson {
     private String program;
     private Time mealServiceStartTime;
    
-   
+  
     public String getProgram() {
         return program;
     }
@@ -28,12 +41,8 @@ public class AddMealsDeliveredRequestJson {
     public void setUsername(String username) {
         this.username = username;
     }
-    public Date getMealDate() {
-        return mealDate;
-    }
-    public void setMealDate(Date mealDate) {
-        this.mealDate = mealDate;
-    }
+  
+  
     public String getPersonName() {
         return personName;
     }

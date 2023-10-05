@@ -5,45 +5,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.PutMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import ofs.mealtracking.model.Entities.Mealcount;
 import ofs.mealtracking.model.Entities.Siteusers;
 import ofs.mealtracking.model.Requests.AddMealsDeliveredRequestJson;
-//import ofs.mealtracking.model.Requests.MealCountRequestJson;
 import ofs.mealtracking.model.Responses.MealOperationsResponseJson;
 import ofs.mealtracking.model.Responses.ReviewFinalMealStatusResponseJson;
 import ofs.mealtracking.model.Responses.ReviewMealCountResponse;
-//import ofs.mealtracking.model.Requests.SiteUserRequestJson;
-//import ofs.mealtracking.model.Responses.AddMealCountResponseJson;
-//import ofs.mealtracking.model.Responses.MealOperationsResponseJson;
-//import ofs.mealtracking.model.Responses.ReviewMealCountResponse;
-//import ofs.mealtracking.model.Requests.MealCountRequestJson;
-//import ofs.mealtracking.model.Responses.MealOperationsResponseJson;
 import ofs.mealtracking.repositories.MealCountRepository;
 import ofs.mealtracking.repositories.SiteusersRepository;
 
 import java.sql.Time;
-
-//import java.math.BigDecimal;
-//import java.sql.Time;
-//import java.sql.Date;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -80,7 +67,6 @@ addMealsDelivered(@RequestBody AddMealsDeliveredRequestJson addMealsDeliveredReq
         if (siteUser == null) {
             throw new Exception("Site User Not Found for the particular meal count");
         }
-
         Mealcount mealCount = new Mealcount();
         mealCount.setSiteuser(siteUser);
         mealCount.setMealDate(addMealsDeliveredRequestJson.getMealDate());
@@ -185,8 +171,6 @@ updateMealServedAndDamaged(
     {
     MealOperationsResponseJson mealOperationsResponseJson = new MealOperationsResponseJson();
     try {
-
-        
         Optional<Mealcount> mealCountOptional = 
         mealCountRepository.findById(mealCountId);
         if (mealCountOptional.isPresent()) {
@@ -360,7 +344,9 @@ public ResponseEntity<Map<String, Object>> submittingMealCount(@PathVariable Lon
 @SuppressWarnings("unchecked")
 public List<Map<String, Object>> adminGetMealCounts(
     @RequestParam(required = false) String siteName,
-    @RequestParam(required = false) String date,
+    //@RequestParam(required = false) String date,
+    @RequestParam(required = false) String startDate,
+    @RequestParam(required = false) String endDate,
     @RequestParam(required = false) String status,
     @RequestParam(required = false) String mealType,
     @RequestParam(required = false) String program,
@@ -390,11 +376,18 @@ public List<Map<String, Object>> adminGetMealCounts(
 
         Map<String, Object> queryParams = new HashMap<>();
 
-        if (date != null && !date.isEmpty()) {
+      /*  if (date != null && !date.isEmpty()) {
             mealCountQuery.append(" AND m.mealdate = :date");
             queryParams.put("date", date);
         }
+ */
 
+        if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty()) {
+            mealCountQuery.append(" AND m.mealdate BETWEEN :startDate AND :endDate");
+            queryParams.put("startDate", startDate);
+            queryParams.put("endDate", endDate);
+        }
+ 
         if (status != null && !status.isEmpty()) {
             mealCountQuery.append(" AND m.mealservicestatus = :status");
             queryParams.put("status", status);

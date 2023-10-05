@@ -131,8 +131,8 @@ public class Mealcount {
     @Column(name = "mealdeliverystatus", nullable = false)
     private String mealDeliveryStatus;
    
-//    @Column(name = "program", nullable = false)
-//    private String program;
+    @Column(name = "program", nullable = false)
+    private String program;
 
 //    @Column(name = "mealcount", nullable = false)
 //    private int mealCount;
@@ -273,7 +273,7 @@ public class Mealcount {
             throw new IllegalArgumentException("Invalid meal type: " + mealType);
         }
     }
-/*  
+
     public String getProgram() {
         return program;
     }
@@ -289,14 +289,14 @@ public class Mealcount {
         }
     }
 
-    public int getMealCount() {
+/*    public int getMealCount() {
         return mealCount;
     }
 
     public void setMealCount(int mealCount) {
         this.mealCount = mealCount;
     }
-*/
+ */
     public String getComment() {
         return comment;
     }

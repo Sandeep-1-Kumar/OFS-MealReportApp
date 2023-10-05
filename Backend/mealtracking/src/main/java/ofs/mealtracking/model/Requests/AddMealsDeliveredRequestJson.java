@@ -12,7 +12,16 @@ public class AddMealsDeliveredRequestJson {
     private Time timeOfMealsDelivered;
     private BigDecimal temperatureOfMeals;
     private String mealType;
+    private String program;
     private Time mealServiceStartTime;
+   
+   
+    public String getProgram() {
+        return program;
+    }
+    public void setProgram(String program) {
+        this.program = program;
+    }
     public String getUsername() {
         return username;
     }

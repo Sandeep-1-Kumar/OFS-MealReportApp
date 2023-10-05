@@ -85,6 +85,7 @@ addMealsDelivered(@RequestBody AddMealsDeliveredRequestJson addMealsDeliveredReq
         mealCount.setSiteuser(siteUser);
         mealCount.setMealDate(addMealsDeliveredRequestJson.getMealDate());
         mealCount.setMealType(addMealsDeliveredRequestJson.getMealType());
+        mealCount.setProgram(addMealsDeliveredRequestJson.getProgram());
         mealCount.setPersonName(addMealsDeliveredRequestJson.getPersonName());
         mealCount.setMealDeliveryStatus(addMealsDeliveredRequestJson.getMealsDeliveryStatus());
         mealCount.setMealsDelivered(addMealsDeliveredRequestJson.getMealsDeliveredCount()); 
@@ -94,6 +95,7 @@ addMealsDelivered(@RequestBody AddMealsDeliveredRequestJson addMealsDeliveredReq
         mealCount.setMealServiceStartTime(addMealsDeliveredRequestJson.getMealServiceStartTime());
         int mealsCountFromPreviousDay = getMealCountFromPreviousDay(siteUser.getId());
         mealCount.setPreviousDayMeals(mealsCountFromPreviousDay);
+
         mealCountRepository.save(mealCount);
 
         reviewMealCountResponse.setMealId(String.valueOf(mealCount.getId()));
@@ -101,6 +103,7 @@ addMealsDelivered(@RequestBody AddMealsDeliveredRequestJson addMealsDeliveredReq
         reviewMealCountResponse.setDeliveryStatus(addMealsDeliveredRequestJson.getMealsDeliveryStatus());
         reviewMealCountResponse.setMealtemperature(String.valueOf(addMealsDeliveredRequestJson.getTemperatureOfMeals()));
         reviewMealCountResponse.setMealType(addMealsDeliveredRequestJson.getMealType());
+        reviewMealCountResponse.setProgram(addMealsDeliveredRequestJson.getProgram());
         reviewMealCountResponse.setMealServiceTime(String.valueOf(addMealsDeliveredRequestJson.getMealServiceStartTime()));
         reviewMealCountResponse.setMealsAvailableFromPreviousDay(
             String.valueOf(mealsCountFromPreviousDay));
@@ -360,6 +363,7 @@ public List<Map<String, Object>> adminGetMealCounts(
     @RequestParam(required = false) String date,
     @RequestParam(required = false) String status,
     @RequestParam(required = false) String mealType,
+    @RequestParam(required = false) String program,
     @RequestParam(required = false) Integer mealsAvailableFromPreviousDay,
     @RequestParam(required = false) Integer mealsDelivered,
     @RequestParam(required = false) Integer mealsServed,
@@ -367,11 +371,12 @@ public List<Map<String, Object>> adminGetMealCounts(
     @RequestParam(required = false) Integer expiredMeals,
     @RequestParam(required = false) Integer eligibleCarryOverMeals,
     @RequestParam(required = false) String comments
+
 ) {
     try {
         String mealCountTableName = "mealcount";
 
-        StringBuilder mealCountQuery = new StringBuilder("SELECT m.id, m.mealdate, m.mealservicestatus, m.mealtype, m.previousdaymeals, m.mealsdelivered, m.mealsserved, m.damagedmeals, m.expiredmeals, m.carryovermeals, m.comment");
+        StringBuilder mealCountQuery = new StringBuilder("SELECT m.id, m.mealdate, m.mealservicestatus, m.mealtype, m.program, m.previousdaymeals, m.mealsdelivered, m.mealsserved, m.damagedmeals, m.expiredmeals, m.carryovermeals, m.comment");
         
         if (siteName != null && !siteName.isEmpty()) {
             mealCountQuery.append(", s.sitename FROM " + mealCountTableName +" m " + " INNER JOIN siteusers s ON m.siteuserid = s.id ");
@@ -398,6 +403,11 @@ public List<Map<String, Object>> adminGetMealCounts(
         if (mealType != null && !mealType.isEmpty()) {
             mealCountQuery.append(" AND m.mealtype = :mealType");
             queryParams.put("mealType", mealType);
+        }
+
+        if (program != null && !program.isEmpty()) {
+            mealCountQuery.append(" AND m.program = :program");
+            queryParams.put("program", program);
         }
 
         if (mealsAvailableFromPreviousDay != null) {
@@ -454,15 +464,16 @@ public List<Map<String, Object>> adminGetMealCounts(
             responseMap.put("date", row[1]);
             responseMap.put("status", row[2]);
             responseMap.put("mealType", row[3]);
-            responseMap.put("mealsAvailableFromPreviousDay", row[4]);
-            responseMap.put("mealsDelivered", row[5]);
-            responseMap.put("mealsServed", row[6]);
-            responseMap.put("damagedMeals", row[7]);
-            responseMap.put("expiredMeals", row[8]);
-            responseMap.put("eligibleCarryOverMeals", row[9]);
-            responseMap.put("comment", row[10]);
+            responseMap.put("program", row[4]);
+            responseMap.put("mealsAvailableFromPreviousDay", row[5]);
+            responseMap.put("mealsDelivered", row[6]);
+            responseMap.put("mealsServed", row[7]);
+            responseMap.put("damagedMeals", row[8]);
+            responseMap.put("expiredMeals", row[9]);
+            responseMap.put("eligibleCarryOverMeals", row[10]);
+            responseMap.put("comment", row[11]);
             if (siteName != null && !siteName.isEmpty()) {
-                responseMap.put("siteName", row[11]);
+                responseMap.put("siteName", row[12]);
             }
             responseList.add(responseMap);
         }

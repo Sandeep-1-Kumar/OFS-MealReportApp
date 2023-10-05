@@ -13,6 +13,13 @@ public class ReviewMealCountResponse {
     private String deliveryStatus;
     private String mealtemperature;
     private String mealType;
+    private String program;
+    public String getProgram() {
+        return program;
+    }
+    public void setProgram(String program) {
+        this.program = program;
+    }
     private String mealServiceTime;
     private String mealsAvailableFromPreviousDay;
     private String mealsDelivered;

@@ -131,9 +131,7 @@ public class Mealcount {
     @Column(name = "mealdeliverystatus", nullable = false)
     private String mealDeliveryStatus;
    
-    @Column(name = "program", nullable = false)
-    private String program;
-
+   
 //    @Column(name = "mealcount", nullable = false)
 //    private int mealCount;
 
@@ -274,21 +272,7 @@ public class Mealcount {
         }
     }
 
-    public String getProgram() {
-        return program;
-    }
-
-    public void setProgram(String program) {
-        String programUpperCase = program.toUpperCase();
-        if (programUpperCase.equals("SFSP")) {
-            this.program = "SFSP";
-        } else if (programUpperCase.equals("CACFP")) {
-            this.program = "CACFP";
-        } else {
-            throw new IllegalArgumentException("Invalid program: " + program);
-        }
-    }
-
+   
 /*    public int getMealCount() {
         return mealCount;
     }

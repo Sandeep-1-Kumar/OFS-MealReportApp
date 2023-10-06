@@ -106,6 +106,23 @@ public class Siteusers {
     @Column(columnDefinition = "TIME")
     private String lunchendtime;
 
+    @Column(name = "program", nullable = false)
+    private String program;
+
+    public String getProgram() {
+        return program;
+    }
+
+    public void setProgram(String program) {
+        String programUpperCase = program.toUpperCase();
+        if (programUpperCase.equals("SFSP")) {
+            this.program = "SFSP";
+        } else if (programUpperCase.equals("CACFP")) {
+            this.program = "CACFP";
+        } else {
+            throw new IllegalArgumentException("Invalid program: " + program);
+        }
+    }
 
     public String getBreakfastendtime() {
         return breakfastendtime;

@@ -162,6 +162,7 @@ public @ResponseBody AuthorizationResponseJson createSiteUsers(@RequestBody Site
         siteusers.setSnacktime(siteUserRequestJson.getSnackTime());
         siteusers.setSnackendtime(siteUserRequestJson.getSnackEndTime());
         siteusers.setMealdays(siteUserRequestJson.getMealDays());
+        siteusers.setProgram(siteUserRequestJson.getProgram());
         Optional<Admins> adminsOptional = adminRepository.findById(Long.parseLong(siteUserRequestJson.getAdminid()));
         if (adminsOptional.isPresent()) {
             Admins admins = adminsOptional.get();

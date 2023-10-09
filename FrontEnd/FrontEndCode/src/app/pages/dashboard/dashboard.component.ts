@@ -5,10 +5,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router ,ActivatedRoute} from '@angular/router';
 import {FormBuilder, AbstractControl,FormGroup} from '@angular/forms'
 import { MatSort } from '@angular/material/sort';
-import { UserDataService } from 'src/app/services/user-data.service';
+
 import { UpdateadminpasswordComponent } from '../updateadminpassword/updateadminpassword.component';
 
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -17,9 +18,11 @@ import { MatDialog } from '@angular/material/dialog';
 export class DashboardComponent implements OnInit {
   currentDate: Date = new Date();
   currentTime: Date = new Date();
-  
+  startDate: Date = new Date();
+endDate: Date = new Date();
+
+  tokenPayload: { username: string, userId: number } | null = null;
   headerHeight: number = 100;
-  userData: { username: string, id: number } = { username: '', id: 0 };
   @ViewChild(MatSort, { static: false }) sort: MatSort | undefined;
   displayedColumns = ['siteUserName', 'mealdate', 'mealtype', 'program', 'mealcount', 'comment','siteuserid'];
   dataSource= new MatTableDataSource<MealCount>([]);
@@ -58,12 +61,17 @@ export class DashboardComponent implements OnInit {
       .join('&');
     return url + '?' + queryString;
   }
+  onLogoutClick() {
+    this.authService.logout(); // Call the logout method from AuthService
+    // Optionally, you can navigate the user to the login page here if needed
+     this.router.navigate(['/login']);
+  }
   openUpdatePasswordDialog() {
     const dialogRef = this.dialog.open(UpdateadminpasswordComponent, {
       width: '300px',
       data: {
-        username: this.userData.username, // Pass the username
-        id: this.userData.id, // Pass the user ID
+        username: this.tokenPayload?.username , // Pass the username
+        id: this.tokenPayload?.userId , // Pass the user ID
       },
     });
   
@@ -73,12 +81,23 @@ export class DashboardComponent implements OnInit {
   }
   
 
-  constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private userDataService: UserDataService,private formBuilder: FormBuilder,private dialog: MatDialog) {
+  constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private formBuilder: FormBuilder,private dialog: MatDialog,private authService: AuthService,) {
    
     };
     
   ngOnInit(): void {
-        this.userData = this.userDataService.getUserData();
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      // Decode the token to get the username and user ID
+      this.tokenPayload = JSON.parse(atob(token));
+      console.log( "token",this.tokenPayload?.username )
+    }  
+
+    if(this.tokenPayload){
+      console.log( "token11",this.tokenPayload.username )
+    }
+    
           setInterval(() => {
             this.currentTime = new Date();
           }, 1000);

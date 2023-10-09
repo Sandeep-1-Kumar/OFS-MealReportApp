@@ -217,10 +217,3 @@ th.mat-header-cell {
   display: flex;
   justify-content: space-between; /* Adjust alignment as needed */
 }
-
-/* Increase the header cell height with more specific selector */
-/* Use !important to force the custom styles */
-table.mat-table.custom-table th.mat-header-cell {
-  height: 60px !important;
-  line-height: 60px !important;
-}

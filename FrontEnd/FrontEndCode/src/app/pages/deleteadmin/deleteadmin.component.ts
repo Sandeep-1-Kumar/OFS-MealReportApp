@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router ,ActivatedRoute} from '@angular/router';
 import {FormBuilder, AbstractControl,FormGroup} from '@angular/forms'
 import { MatSort } from '@angular/material/sort';
-import { UserDataService } from 'src/app/services/user-data.service';
+
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
@@ -29,11 +29,11 @@ export class DeleteadminComponent {
   userData: { username: string, id: number } = { username: '', id: 0 };
   dataSource= new MatTableDataSource<admin>([]);
   displayedColumns = ['username', 'id','actions'];
-  constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private userDataService: UserDataService,private formBuilder: FormBuilder, private snackBar: MatSnackBar,private dialog: MatDialog) {
+  constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private formBuilder: FormBuilder, private snackBar: MatSnackBar,private dialog: MatDialog) {
   };
   ngOnInit(): void {
    
-    this.userData = this.userDataService.getUserData();
+    
     this.http.get<admin[]>(`http://localhost:8080/OFS/admin/getAllAdmins/${this.userData.id}`)
     .subscribe(
       (admins) => {

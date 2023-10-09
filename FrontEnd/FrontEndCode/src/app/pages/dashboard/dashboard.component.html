@@ -45,8 +45,8 @@
     </head>
     <body>
         <div class="dashboard-container">
-            <div class="dashboard-heading">
-                <h1>Welcome,  {{userData.username}}</h1>
+            <div class="dashboard-heading" >
+                <h1 >Welcome,  {{this.tokenPayload?.username}}</h1>
                 
                 <!-- (ID: {{ userData.id || 'N/A' }})!</h1> -->
                 
@@ -58,7 +58,7 @@
   
                     
                     <div class="button-space"></div>
-                    <button mat-raised-button color="warn" [routerLink]="['/login']">Logout</button>
+                    <button mat-raised-button color="warn" (click)="onLogoutClick()">Logout</button>
                     
                   </div>
                 <div class="actions-heading">Actions :</div>
@@ -118,18 +118,28 @@
     <!-- <mat-form-field>
         <input matInput placeholder="Date (YYYY-MM-DD)" [(ngModel)]="filterDate">
       </mat-form-field> -->
-    <mat-form-field>
-      <input matInput placeholder="Date (YYYY-MM-DD)" [(ngModel)]="filterDate">
-    </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Program" [(ngModel)]="filterProgram">
+      </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Meal Type" [(ngModel)]="filterMealType">
     </mat-form-field>
+    
     <mat-form-field>
-      <input matInput placeholder="Program" [(ngModel)]="filterProgram">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" [(ngModel)]="startDate">
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
     </mat-form-field>
+    
     <mat-form-field>
-      <input matInput placeholder="Site User ID" [(ngModel)]="filterSiteUserId">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" [(ngModel)]="endDate">
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
     </mat-form-field>
+    
+    
     <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
   </div>
   

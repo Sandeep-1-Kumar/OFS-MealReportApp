@@ -2,7 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient ,HttpHeaders } from '@angular/common/http';
 
-import { UserDataService } from 'src/app/services/user-data.service';
+
 import {Router} from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent {
   username: string = '';
   password: string= '';
   userData: any;
-  constructor(private http: HttpClient,private router: Router,private userDataService: UserDataService) { }
+  constructor(private http: HttpClient,private router: Router) { }
 
   
 
@@ -26,6 +26,7 @@ export class LoginComponent {
         password: this.password
       };
 
+
       // Define HTTP headers if needed, e.g., for content type
       const headers = new HttpHeaders({
         'Content-Type': 'application/json'
@@ -34,15 +35,12 @@ export class LoginComponent {
       this.http.post<any>('http://localhost:8080/OFS/admin/signIn', signInRequest, { headers }).subscribe(
   (response) => {
     if (response.statusCode === '200') {
-      console.log(response.statusCode);
-      console.log(response.username);
-      console.log(response.id);
-      this.userDataService.setUserData({
+      const tokenPayload = {
         username: response.username,
-        id: response.id
-      });
-      
-      
+        userId: response.id // Assuming you have the user's ID
+      };
+      const token = btoa(JSON.stringify(tokenPayload));
+      localStorage.setItem('token', token);
       this.router.navigate(['Dashboard']);
     } else {
       console.log('Login failed:11', response.statusCode)
@@ -77,11 +75,12 @@ loginSiteuser() : void
 (response) => {
   if (response.statusCode === '200') {
     console.log(response.statusCode);
-    this.userDataService.setUserData({
-      username: response.username,
-      id: response.id
-    });
-    console.log(this.userData);
+    const tokenPayload = {
+      username: this.username,
+      userId: response.id // Assuming you have the user's ID
+    };
+    const token = btoa(JSON.stringify(tokenPayload));
+    localStorage.setItem('token', token);
     this.router.navigate(['SiteUserDashboard']);
   } else {
     console.log('Login failed:11', response.statusCode)

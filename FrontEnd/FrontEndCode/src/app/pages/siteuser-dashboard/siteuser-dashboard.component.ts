@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router ,ActivatedRoute} from '@angular/router';
-import { UserDataService } from 'src/app/services/user-data.service';
+
 
 @Component({
   selector: 'app-siteuser-dashboard',
@@ -12,14 +12,18 @@ export class SiteuserDashboardComponent {
   currentDate: Date = new Date();
   currentTime: Date = new Date();
   userData: { username: string, id: number } = { username: '', id: 0 };
-
-  constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private userDataService: UserDataService) {}
+  tokenPayload: { username: string, userId: number } | null = null;
+  constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute) {}
   ngOnInit(): void {
     // Update the time every second
-    this.route.params.subscribe(params => {
-      // Retrieve user data from the service
-      this.userData = this.userDataService.getUserData();
-    });
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      // Decode the token to get the username and user ID
+      this.tokenPayload = JSON.parse(atob(token));
+      console.log( "token",this.tokenPayload?.username )
+    }  
+    
     setInterval(() => {
       this.currentTime = new Date();
     }, 1000);

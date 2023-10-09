@@ -20,7 +20,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import {MatSelectModule} from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { 
 	IgxButtonModule,
 	IgxIconModule,
@@ -35,6 +38,8 @@ import { EditpasswordComponent } from './pages/editpassword/editpassword.compone
 import { AddadminComponent } from './pages/addadmin/addadmin.component';
 import { UpdateadminpasswordComponent } from './pages/updateadminpassword/updateadminpassword.component';
 import { DeleteadminComponent } from './pages/deleteadmin/deleteadmin.component';
+import { AddmealcountformComponent } from './pages/addmealcountform/addmealcountform.component';
+
 
 @NgModule({
   declarations: [
@@ -45,19 +50,25 @@ import { DeleteadminComponent } from './pages/deleteadmin/deleteadmin.component'
     SiteuserDashboardComponent,
     SuccessDialogComponent,
     EditSiteuserComponent,
-   
     EditpasswordComponent,
     AddadminComponent,
     UpdateadminpasswordComponent,
     DeleteadminComponent,
+    AddmealcountformComponent
+
+   
   ],
   imports: [
     BrowserModule,
     MatDividerModule,
+    MatNativeDateModule,
     MatSnackBarModule,
+    MatDatepickerModule,
     MatFormFieldModule,
     MatSortModule,
+    MatTooltipModule,
     MatPaginatorModule,
+    MatSelectModule,
     MatCardModule,
     AppRoutingModule,
     MatTableModule,

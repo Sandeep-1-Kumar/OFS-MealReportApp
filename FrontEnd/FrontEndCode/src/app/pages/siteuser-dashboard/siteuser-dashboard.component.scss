@@ -7,12 +7,22 @@
     align-items: center;
     cursor: pointer;
     background: none;
+    align-items: center;
+    text-align: center;
   }
   
   .icon-button img {
     width: 32px; /* Adjust the width of the icon */
     height: 32px; /* Adjust the height of the icon */
     margin-bottom: 5px; /* Add spacing between the icon and text */
+    align-items: center;
+    text-align: center;
+  }
+  .icon-button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30vh; /* Make the container full height of the viewport */
   }
   
   .dashboard-container {
@@ -152,16 +162,42 @@
     margin-left: 8px; /* Adjust spacing between buttons as needed */
   }
   .actions-heading {
-   /* Bluish violet background color */
-   /* Purple-Blue background color */
-   color: #0172fd; 
+    font-family: 'Roboto Slab', serif;
+    color: #4CAF50;
     font-weight: bold;
     text-align: left;
     margin-top: 10px;
     margin-left: 10px;
     font-size: 32px;
-    padding: 5px; /* Add padding to create space around the text */
+    padding: 5px;
+    
+  
   }
+  .time-text {
+    margin-right: 1px; /* Adjust the right margin as needed */
+  }
+  
+  .date-text {
+    text-align: center; /* Right-align the date */
+  }
+  
+  /* Add these styles to your CSS file */
+.time-date-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.time {
+  font-size: 24px; /* Adjust the font size as needed */
+  font-weight: bold; /* Add bold font-weight if desired */
+}
+
+.date {
+  font-size: 14px; /* Adjust the font size as needed */
+}
+
   
   
   

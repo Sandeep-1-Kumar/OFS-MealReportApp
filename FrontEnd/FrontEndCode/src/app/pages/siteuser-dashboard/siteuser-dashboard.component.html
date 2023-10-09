@@ -46,30 +46,23 @@
 <body>
     <div class="dashboard-container">
         <div class="dashboard-heading">
-            <h1 class="dashboard-heading"> Welcome, {{ userData.username }}</h1>
+            <h1 class="dashboard-heading"> Welcome, {{ this.tokenPayload?.username}}</h1>
         </div>
         <main class="main-content">
             <div class="actions-heading">Actions :</div>
-            <br>
             <div class="button-container">
-               
-               
-
-                  <button class="icon-button"[routerLink]="['/Signup']" >
+  
+                    
+              <div class="button-space"></div>
+              <button mat-raised-button color="warn" [routerLink]="['/login']">Logout</button>
+              
+            </div>
+            <br>
+            <div class="icon-button-container">
+                  <button class="icon-button"[routerLink]="['/addmealcount']"   >
                     <img src="assets/edit.png" alt="Button Image" style="width: 100px; height: 100px;"> 
                    Add Meal Count
-                  </button>
-
-                  <button class="icon-button"[routerLink]="['/Signup']" >
-                    <img src="assets/home-button.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                   Home
-                  </button>
-
-                  <button class="icon-button"[routerLink]="['/Signup']" >
-                    <img src="assets/settings.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                   Settings
-                  </button>
-                 
+                  </button>   
               </div>
                
 
@@ -77,14 +70,20 @@
                 <mat-card class="mat-card">
                   <mat-card-content>
                     <div class="mat-card-content-container">
-                      <img src="assets/time.png" alt="Profile Pic" class="mat-card-image">
+                      <!-- <img src="assets/time.png" alt="Profile Pic" class="mat-card-image"> -->
                       <div class="mat-card-text">
                         <div class="date-time-text">
-                            <div class="date"><h4>{{ currentDate | date:'mediumDate' }}</h4></div>
-                            <div class="time"><h4>{{ currentTime | date:'shortTime' }}</h4></div>
+                          <div class="time">
+                            <h4 class="time-text">{{ currentTime | date:'h:mm a' }}</h4>
                           </div>
-                        <!-- <h3>Title goes here</h3>
-                        <p>Secondary text</p> -->
+                          <div class="date">
+                            <p class="date-text">
+                              {{ currentDate | date:'d MMM y' }}<br>
+                              {{ currentDate | date:'EEEE' }}
+                            </p>
+                          </div>
+                        </div>
+                        
                       </div>
                     </div>
                   </mat-card-content>

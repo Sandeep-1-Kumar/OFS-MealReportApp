@@ -3,7 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router ,ActivatedRoute} from '@angular/router';
 import {FormBuilder, AbstractControl,FormGroup} from '@angular/forms'
 import { MatSort } from '@angular/material/sort';
-import { UserDataService } from 'src/app/services/user-data.service';
+
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,13 +21,20 @@ export interface SiteUSer {
 export class EditSiteuserComponent {
   headerHeight: number = 100;
   dataSource= new MatTableDataSource<SiteUSer>([]);
+  tokenPayload: { username: string, userId: number } | null = null;
   displayedColumns = ['username', 'id','actions'];
-  constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private userDataService: UserDataService,private formBuilder: FormBuilder, private snackBar: MatSnackBar,private dialog: MatDialog) {
+  constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private formBuilder: FormBuilder, private snackBar: MatSnackBar,private dialog: MatDialog) {
   };
 
   ngOnInit(): void {
    
-      
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      // Decode the token to get the username and user ID
+      this.tokenPayload = JSON.parse(atob(token));
+      console.log( "token",this.tokenPayload?.username )
+    }  
       this.http.get<SiteUSer[]>('http://localhost:8080/OFS/admin/getAllSiteUsers')
       .subscribe(
         (SiteUSers) => {
@@ -92,10 +99,10 @@ onDeleteClick(userId: number): void {
       console.log('Site user deleted successfully.');
       // Remove the user from your data source if needed
       this.snackBar.open('Site user deleted successfully', 'Dismiss', {
-        duration: 3000, // Adjust the duration as needed (in milliseconds)
+        duration: 2000, // Adjust the duration as needed (in milliseconds)
         panelClass: 'success-snackbar', // Add custom CSS class for styling
       });
-
+      this.refreshSiteUserData();
     
     },
     (error) => {
@@ -103,5 +110,16 @@ onDeleteClick(userId: number): void {
       console.error('Error deleting site user:', error);
     }
   );
+}
+refreshSiteUserData() {
+  this.http.get<SiteUSer[]>(`http://localhost:8080/OFS/admin/getAllSiteUsers`)
+    .subscribe(
+      (SiteUSers) => {
+        this.dataSource.data = SiteUSers;
+      },
+      (error) => {
+        console.error('Error fetching admin data:', error);
+      }
+    );
 }
 }

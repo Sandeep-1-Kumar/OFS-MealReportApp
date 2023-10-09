@@ -6,7 +6,6 @@ import { NgxMaterialTimepickerComponent } from 'ngx-material-timepicker';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SuccessDialogComponent } from 'src/app/services/success-dialog/success-dialog.component';
 
-import { UserDataService } from 'src/app/services/user-data.service';
 @Component({
   selector: 'app-signup-siteuser',
   templateUrl: './signup-siteuser.component.html',
@@ -17,7 +16,7 @@ export class SignupSiteuserComponent {
 userData: { username: string, id: number } = { username: '', id: 0 };
     //time: { hour: number, minute: number } = { hour: 12, minute: 0 }; // Define the time variable
     registrationForm!: FormGroup;
-    
+    tokenPayload: { username: string, userId: number } | null = null;
     dayMapping: { [key: string]: string } = {
       mon: 'Monday',
       tue: 'Tuesday',
@@ -27,7 +26,7 @@ userData: { username: string, id: number } = { username: '', id: 0 };
       sat: 'Saturday',
       sun: 'Sunday',
     };
-    constructor(private fb: FormBuilder,private http: HttpClient,private router: Router,public dialog: MatDialog,private userDataService: UserDataService) {
+    constructor(private fb: FormBuilder,private http: HttpClient,private router: Router,public dialog: MatDialog) {
       // Initialize time properties
       
     }
@@ -56,7 +55,14 @@ userData: { username: string, id: number } = { username: '', id: 0 };
 
 
   ngOnInit(): void {
-    this.userData = this.userDataService.getUserData();
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      // Decode the token to get the username and user ID
+      this.tokenPayload = JSON.parse(atob(token));
+      console.log( "token",this.tokenPayload?.username )
+    }  
+    
     this.registrationForm = this.fb.group({
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -110,7 +116,7 @@ userData: { username: string, id: number } = { username: '', id: 0 };
         snackEndTime: this.stripAmPm(this.registrationForm.get('snackEndTime')?.value) || '',
         
         mealDays: this.registrationForm.get('mealDays')?.value || '',
-        adminid: this.userData.id
+        adminid: this.tokenPayload?.userId
         
       };
       console.log('Submitted Data:', customFormData);

@@ -1,0 +1,184 @@
+<div class="form_wrapper">
+    <div class="form_container">
+      <div class="title_container">
+        <h2>Add Meal Count</h2>
+      </div>
+      <div class="row clearfix">
+            <div class="form-column">
+                <form [formGroup]="personalDetails">
+                    <!-- Username Field -->
+                    <fieldset *ngIf="step == 1">
+                    <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                        <input type="text" formControlName="siteName" placeholder="siteName" required />
+                    </div>
+        
+                    <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                        <input type="text" formControlName="siteName" placeholder="siteName" required />
+                    </div>
+                    <!-- Email Field -->
+                    <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                        <mat-select formControlName="mealType" placeholder="Select an option" required>
+                        <mat-option *ngFor="let option of mealtimes" [value]="option">{{ option }}</mat-option>
+                        </mat-select>
+                    </div>
+        
+                    <!-- Password Field -->
+                    <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                        <input type="text" formControlName="date" placeholder="date" required />
+                    </div>
+        
+                    <!-- Site Name Field -->
+                    <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                        <input type="text" formControlName="fullName" placeholder="fullName" required />
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="button-container">
+                        <input class="button" type="submit" value="Next" (click)="next()" />
+                        <button mat-raised-button color="primary" [routerLink]="['/SiteUserDashboard']">Go Back</button>
+                        
+                    </div>
+                    </fieldset>
+                </form>
+            </div>
+                <div class="form-column">
+                   <form [formGroup]="deliveryDetailsForm">
+                    <!-- Username Field -->
+                    <fieldset *ngIf="step == 2">
+                    <!-- Did you get a delivery today? (Yes/No) -->
+                    <div class="radio-group">
+                        <p>Did you get a delivery today?</p>
+        
+                        <button igxButton="raised" [ngClass]="{ 'selected-button': deliveryReceived === 'yes' }" igxButtonColor="black"
+                        igxRipple="black" igxButtonBackground="#72da67" [igxRippleCentered]="true" [igxRippleDuration]="200"
+                        (click)="setDelivery('yes')">Yes
+                        </button>
+                        <span style="margin-right: 9px;"></span>
+                        <button igxButton="raised" [ngClass]="{ 'selected-button': deliveryReceived === 'no' }" igxButtonColor="white"
+                        igxRipple="black" igxButtonBackground="#DC143C" [igxRippleCentered]="true" [igxRippleDuration]="200"
+                        (click)="setDelivery('no')">No
+                        </button>
+                    </div>
+                    <br>
+                    <div *ngIf="deliveryReceived === 'yes'">
+                        <!-- Fields for "Yes" option -->
+                        <!-- # of meals delivered -->
+                        <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                        <input type="text" formControlName="numMealsDelivered" placeholder="numMealsDelivered" required />
+                        </div>
+        
+                        <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                        <input type="text" formControlName="deliveryTime" placeholder="deliveryTime" required />
+                        </div>
+                        <!-- Email Field -->
+        
+                        <!-- Password Field -->
+                        <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                        <input type="text" formControlName="mealTemperature" placeholder="mealTemperature" required />
+                        </div>
+        
+                        <!-- Site Name Field -->
+                        <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                        <input type="text" formControlName="mealServiceTime" placeholder="mealServiceTime" required />
+                        </div>
+                    </div>
+                    <div *ngIf="deliveryReceived === 'no'">
+                        <!-- Fields for "Yes" option -->
+                        <!-- # of meals delivered -->
+                        <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                        <input type="text" formControlName="numMealsPreviousDay" placeholder="numMealsPreviousDay" required />
+                        </div>
+        
+                        <!-- Password Field -->
+                        <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                        <input type="text" formControlName="mealTemperature" placeholder="mealTemperature" required />
+                        </div>
+        
+                        <!-- Site Name Field -->
+                        <div class="input_field">
+                        <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                        <input type="text" formControlName="mealServiceTime" placeholder="mealServiceTime" required />
+                        </div>
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="button-container">
+                        <button mat-raised-button color="primary" (click)="previous()">Previous</button>
+                        
+                      
+                        <button igxButton="raised" color="warn" igxButtonColor="white" igxRipple="black" igxButtonBackground="#00BFFF"
+                        [igxRippleCentered]="true" [igxRippleDuration]="200" [disabled]="deliveryReceived !== 'yes' && deliveryReceived !== 'no'"
+                        (click)="next()">Next
+                        </button>
+                    </div>
+                    </fieldset>
+                   </form>
+                </div>
+                <div class="form-column">
+                    <form [formGroup]="reviewForm">
+                    <!-- Username Field -->
+                    <fieldset *ngIf="step == 3">
+                        <!-- Did you get a delivery today? (Yes/No) -->
+                        <!-- <div class="input_field centered-textarea">
+                            <span><i aria-hidden="true" class="fa fa-info"></i></span>
+                            <div class="auto-expanding-textarea" [innerHTML]="concatenatedValues()"></div>
+                            <textarea [value]="concatenatedValues()" readonly></textarea>
+                          </div> -->
+                          
+                          <div class="input_field">       
+                          <input type="file" accept="image/*" />
+                          <canvas #signatureCanvas width="300" height="150"></canvas>
+                           </div>
+            
+                        <!-- Submit Button -->
+                        <div class="button-container">
+                        <button mat-raised-button color="primary" (click)="previous()">Previous</button>
+                        <button igxButton="raised" color="warn" igxButtonColor="white" igxRipple="black" igxButtonBackground="#00BFFF"
+                            [igxRippleCentered]="true" [igxRippleDuration]="200" 
+                            (click)="next()">Next
+                        </button>
+                        </div>
+                    </fieldset>
+                    </form>
+                </div>
+                <div class="form-column">
+                    <form [formGroup]="reviewForm2">
+                    <!-- Username Field -->
+                    <fieldset *ngIf="step == 4">
+                        <!-- Did you get a delivery today? (Yes/No) -->
+                        <!-- <div class="input_field centered-textarea">
+                            <span><i aria-hidden="true" class="fa fa-info"></i></span>
+                            <div class="auto-expanding-textarea" [innerHTML]="concatenatedValues()"></div>
+                            <textarea [value]="concatenatedValues()" readonly></textarea>
+                          </div> -->
+                          
+                          <!-- <div class="input_field">
+                                
+                          <input type="file" accept="image/*" />
+                          <canvas #signatureCanvas width="300" height="150"></canvas>
+                           </div> -->
+            
+                        <!-- Submit Button -->
+                        <div class="button-container">
+                        <button mat-raised-button color="primary" (click)="previous()">Previous</button>
+                        <button igxButton="raised" color="warn" igxButtonColor="white" igxRipple="black" igxButtonBackground="#00BFFF"
+                            [igxRippleCentered]="true" [igxRippleDuration]="200" 
+                            (click)="next()">Next
+                        </button>
+                        </div>
+                    </fieldset>
+                    </form>
+                </div>
+      </div>
+    </div>
+  </div>
+  

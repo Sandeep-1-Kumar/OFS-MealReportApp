@@ -7,6 +7,20 @@ $grey:#cccccc;
   flex-wrap: wrap; /* Allow buttons to wrap to the next row */
   align-items: center;
 }
+.buttons-sample {
+    display: flex;
+    margin: 8px;
+}
+
+.button-sample {
+    display: flex;
+    margin-right: 16px;
+}
+
+
+
+
+
 body {
   background: linear-gradient(to bottom, #FFFFFF, #E6E6E6);
   /* Replace the colors above with your desired gradient colors */
@@ -118,10 +132,10 @@ body {
 .form_wrapper {
 	
   background: linear-gradient(to bottom, #007BFF, #FFFFFF);
-	width: 400px;
+	width: 350px;
 	max-width: 100%;
 	box-sizing: border-box;
-	padding: 25px;
+	padding: 30px;
 	margin: 8% auto 0;
 	position: relative;
 	z-index: 1;
@@ -157,19 +171,24 @@ body {
         font-size: 12px;
     }
 	.row {
-		margin: 10px -15px;
+		margin: 30px -10px;
 		>div {
 			padding: 0 15px;
 			box-sizing: border-box;
 		}
 	}
 	.col_half {
-		width: 50%;
+		width: 70%;
 		float: left;
 	}
+    /* Style for Mat-Select */
+
+  
 	.input_field {
 		position: relative;
-		margin-bottom: 20px;
+		margin-bottom: 30px;
+
+        width: 250px;
         -webkit-animation: bounce 0.6s ease-out;
   	     animation: bounce 0.6s ease-out;
 		>span {
@@ -189,7 +208,7 @@ body {
 	.textarea_field {
 		>span {
 			>i {
-				padding-top: 10px;
+				padding-top: 40px;
 			}
 		}
 	}
@@ -250,7 +269,59 @@ body {
     }
   }
 }
-
+/* Styling for mat-select */
+mat-select {
+    width: 100%;
+    background: #fafafa;
+    padding: 8px 10px 9px 35px;
+    height: 35px;
+    border: 1px solid $grey;
+    box-sizing: border-box;
+    outline: none;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    transition: all 0.30s ease-in-out;
+  }
+  
+  mat-select:hover {
+    background: #fafafa;
+  }
+  
+  mat-select:focus {
+    -webkit-box-shadow: 0 0 2px 1px rgba(255, 169, 0, 0.5);
+    -moz-box-shadow: 0 0 2px 1px rgba(255, 169, 0, 0.5);
+    box-shadow: 0 0 2px 1px rgba(255, 169, 0, 0.5);
+    border: 1px solid $yellow;
+    background: #fafafa;
+  }
+  
+ 
+/* Add these styles to your CSS file */
+/* Add these styles to your CSS file */
+/* Add these styles to your CSS file *//* Add these styles to your CSS file */
+.centered-textarea {
+    text-align: center; /* Center-align the text horizontally */
+    background-color: #f0f0f0; /* Set the background color to a different color */
+    padding: 10px; /* Add some padding for better visual appearance */
+    min-height: 100px; /* Set a minimum height for the outer container */
+  }
+  
+  .centered-textarea textarea {
+    display: none; /* Hide the textarea */
+  }
+  
+  .auto-expanding-textarea {
+    width: 100%; /* Make the div take up the full width of the container */
+    white-space: pre-wrap; /* Preserve line breaks and wrap text */
+    overflow: hidden; /* Hide any content that overflows */
+    word-wrap: break-word; /* Break words to prevent overflow */
+    min-height: inherit; /* Inherit the minimum height from the outer container */
+  }
+  
+  
+  
+  
 .form_container {
   background: linear-gradient(to bottom, #007BFF, #FFFFFF);
 	.row {
@@ -461,3 +532,37 @@ body {
 		padding-bottom: 20px;
 	}
 }
+
+  fieldset {
+    /* for chrome and safari*/
+    -webkit-animation-duration: 0.25ms;
+    -webkit-animation-name: slidein;
+  
+    /*for firefox*/
+    -moz-animation-duration: 1s;
+    -moz-animation-name: slidein;
+  
+    /* for opera*/
+    -o-animation-duration: 1s;
+    -o-animation-name: slidein;
+  
+    /* Standard syntax*/
+    animation-duration: 1s;
+    animation-name: slidein;
+  }
+
+  .fs-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #2c3e50;
+    margin-bottom: 1px;
+    letter-spacing: 2px;
+    font-weight: bold;
+  }
+  .button-container {
+    display: flex; /* Use flexbox to arrange buttons horizontally */
+    justify-content: space-between; /* Add space between buttons */
+  }
+  .button-container button:first-child {
+    margin-right: auto; /* Push the first button to the left by giving it auto margin on the right */
+  }

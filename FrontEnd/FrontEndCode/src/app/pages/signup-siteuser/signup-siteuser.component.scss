@@ -13,6 +13,32 @@ body {
   margin: 0;
   padding: 0;
 }
+
+mat-select {
+  width: 100%;
+  background: #fafafa;
+  padding: 8px 10px 9px 35px;
+  height: 35px;
+  border: 1px solid $grey;
+  box-sizing: border-box;
+  outline: none;
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  transition: all 0.30s ease-in-out;
+}
+
+mat-select:hover {
+  background: #fafafa;
+}
+
+mat-select:focus {
+  -webkit-box-shadow: 0 0 2px 1px rgba(255, 169, 0, 0.5);
+  -moz-box-shadow: 0 0 2px 1px rgba(255, 169, 0, 0.5);
+  box-shadow: 0 0 2px 1px rgba(255, 169, 0, 0.5);
+  border: 1px solid $yellow;
+  background: #fafafa;
+}
 igx-time-picker {
     width: 400px;
 }

@@ -42,6 +42,13 @@
                   <span><i aria-hidden="true" class="fa fa-user"></i></span>
                   <input type="text" formControlName="siteAddress" placeholder="Site Address" required />
                 </div>
+               
+                <div class="input_field">
+                  <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                  <mat-select formControlName="program" placeholder="Choose ProgramType" required>
+                  <mat-option *ngFor="let option of programs" [value]="option">{{ option }}</mat-option>
+                  </mat-select>
+              </div>
               
 <div class="form-group">
   <label class="bold-label" for="breakfastTime">Breakfast Time:</label>

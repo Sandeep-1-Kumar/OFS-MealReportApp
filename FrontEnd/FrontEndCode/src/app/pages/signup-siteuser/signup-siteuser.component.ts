@@ -17,6 +17,8 @@ userData: { username: string, id: number } = { username: '', id: 0 };
     //time: { hour: number, minute: number } = { hour: 12, minute: 0 }; // Define the time variable
     registrationForm!: FormGroup;
     tokenPayload: { username: string, userId: number } | null = null;
+
+    programs=['SFSP','CACFP']
     dayMapping: { [key: string]: string } = {
       mon: 'Monday',
       tue: 'Tuesday',
@@ -70,6 +72,7 @@ userData: { username: string, id: number } = { username: '', id: 0 };
       siteName: ['', Validators.required],
       siteSupervisor: ['', Validators.required],
       siteAddress: ['', Validators.required],
+      program :[''],
       breakfastTime: [''],
       breakfastEndTime: [''],
       lunchTime: [''],
@@ -106,6 +109,7 @@ userData: { username: string, id: number } = { username: '', id: 0 };
         siteName: this.registrationForm.get('siteName')?.value || '',
         siteSupervisor: this.registrationForm.get('siteSupervisor')?.value || '',
         siteAddress: this.registrationForm.get('siteAddress')?.value || '',
+        program: this.registrationForm.get('program')?.value || '',
         breakfastTime: this.stripAmPm(this.registrationForm.get('breakfastTime')?.value) || '',
         breakfastEndTime: this.stripAmPm(this.registrationForm.get('breakfastEndTime')?.value) || '',
         lunchTime: this.stripAmPm(this.registrationForm.get('lunchTime')?.value) || '',

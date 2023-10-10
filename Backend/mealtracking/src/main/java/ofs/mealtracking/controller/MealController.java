@@ -124,6 +124,14 @@ public int getMealCountFromPreviousDay(@PathVariable(name = "siteUserId", requir
     }
 }
     
+@GetMapping(path = "/siteuser/getSiteName/{siteUserId}")
+public String getSiteName(@PathVariable Long siteUserId) {
+
+    String responseString = "";
+    Optional<Siteusers> siteuser = siteusersRepository.findById(siteUserId);
+    responseString = siteuser.get().getSitename();
+    return responseString;
+}
 
 @PutMapping(path = "/siteuser/reviewMealUpdateSignature/{mealCountId}")
 public @ResponseBody MealOperationsResponseJson 

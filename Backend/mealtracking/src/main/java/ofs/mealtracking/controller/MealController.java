@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import ofs.mealtracking.model.Entities.Mealcount;
 import ofs.mealtracking.model.Entities.Siteusers;
 import ofs.mealtracking.model.Requests.AddMealsDeliveredRequestJson;
+import ofs.mealtracking.model.Responses.AuthorizationResponseJson;
 import ofs.mealtracking.model.Responses.MealOperationsResponseJson;
 import ofs.mealtracking.model.Responses.ReviewFinalMealStatusResponseJson;
 import ofs.mealtracking.model.Responses.ReviewMealCountResponse;
@@ -131,6 +132,17 @@ public String getSiteName(@PathVariable Long siteUserId) {
     Optional<Siteusers> siteuser = siteusersRepository.findById(siteUserId);
     responseString = siteuser.get().getSitename();
     return responseString;
+}
+
+@GetMapping(path = "/siteuser/getAllSiteNames")
+public List<String> getAllSiteNames() {
+    List<String> siteNames = new ArrayList<>();
+    Iterable<Siteusers> siteuserItr = siteusersRepository.findAll();
+
+    for (Siteusers siteuser : siteuserItr) {
+        siteNames.add(siteuser.getSitename());
+    }
+    return siteNames;
 }
 
 @PutMapping(path = "/siteuser/reviewMealUpdateSignature/{mealCountId}")
@@ -482,6 +494,81 @@ public List<Map<String, Object>> adminGetMealCounts(
     } catch (Exception e) {
         e.printStackTrace();
         return new ArrayList<>();
+    }
+}
+
+
+
+@PutMapping(path = "/siteuser/updateMealCount/{mealCountId}")
+public AuthorizationResponseJson updateMealCount(
+    @PathVariable Long mealCountId,
+    @RequestParam(required = false) String siteName,
+     @RequestParam(required = false) String mealDate,
+     @RequestParam(required = false) String status,
+    @RequestParam(required = false) String mealType,
+    @RequestParam(required = false) Integer mealsAvailableFromPreviousDay,
+    @RequestParam(required = false) Integer mealsDelivered,
+    @RequestParam(required = false) Integer mealsServed,
+    @RequestParam(required = false) Integer damagedMeals,
+    @RequestParam(required = false) Integer expiredMeals,
+    @RequestParam(required = false) Integer carryOverMeals,
+    @RequestParam(required = false) String comment
+) {
+    try {
+        Optional<Mealcount> mealCountOptional = mealCountRepository.findById(mealCountId);
+        AuthorizationResponseJson authorizationResponseJson;
+        if (mealCountOptional.isPresent()) {
+            Mealcount mealCount = mealCountOptional.get();
+
+            if (siteName != null && !siteName.isEmpty()) {
+                Siteusers siteusers = siteusersRepository.findByUsername(siteName);
+                if (siteusers != null) {
+                    siteusers.setSitename(siteName);
+                    siteusersRepository.save(siteusers);
+                    mealCount.setSiteuser(siteusers);
+                } else {
+                    authorizationResponseJson= new AuthorizationResponseJson("409","site user not found");
+                    return authorizationResponseJson;
+                }
+            }
+            if (mealType != null) {
+                mealCount.setMealType(mealType);
+            }
+            if (status != null) {
+                mealCount.setMealServiceStatus(status);
+            }
+            if (mealsDelivered != null) {
+                mealCount.setMealsDelivered(mealsDelivered);
+            }
+            if (mealsAvailableFromPreviousDay != null) {
+                mealCount.setPreviousDayMeals(mealsAvailableFromPreviousDay);
+            }
+            if (mealsServed != null) {
+                mealCount.setMealsServed(mealsServed);
+            }
+            if (damagedMeals != null) {
+                mealCount.setDamagedMeals(damagedMeals);
+            }
+            if (expiredMeals != null) {
+                mealCount.setExpiredMeals(expiredMeals);
+            }
+            if (carryOverMeals != null) {
+                mealCount.setCarryOverMeals(carryOverMeals);
+            }
+            if (comment != null) {
+                mealCount.setComment(comment);
+            }
+            mealCountRepository.save(mealCount);
+            authorizationResponseJson= new AuthorizationResponseJson("201","updated successfully");
+            return authorizationResponseJson;
+        } else {
+            authorizationResponseJson= new AuthorizationResponseJson("409","updation failed");
+            return authorizationResponseJson;
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        AuthorizationResponseJson authorizationResponseJson= new AuthorizationResponseJson("409",e.getMessage());
+        return authorizationResponseJson;
     }
 }
 

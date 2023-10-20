@@ -521,7 +521,7 @@ public AuthorizationResponseJson updateMealCount(
             Mealcount mealCount = mealCountOptional.get();
 
             if (siteName != null && !siteName.isEmpty()) {
-                Siteusers siteusers = siteusersRepository.findByUsername(siteName);
+                Siteusers siteusers = mealCount.getSiteuser();
                 if (siteusers != null) {
                     siteusers.setSitename(siteName);
                     siteusersRepository.save(siteusers);

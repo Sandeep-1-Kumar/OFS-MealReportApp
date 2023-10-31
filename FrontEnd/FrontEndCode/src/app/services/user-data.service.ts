@@ -12,5 +12,15 @@ export class UserDataService {
   getUserData() {
     return this.userData;
   }
+
+  rowData: any;
+
+  setRowData(rowData: any) {
+    this.rowData = rowData;
+  }
+
+  getRowData() {
+    return this.rowData;
+  }
   constructor() { }
 }

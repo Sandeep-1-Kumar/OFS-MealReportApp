@@ -13,6 +13,20 @@ body {
   margin: 0;
   padding: 0;
 }
+/* Center the Snackbar */
+.mat-snack-bar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 
 mat-select {
   width: 100%;

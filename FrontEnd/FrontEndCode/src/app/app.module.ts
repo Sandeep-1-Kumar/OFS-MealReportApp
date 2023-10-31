@@ -24,6 +24,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ExportAsModule } from 'ngx-export-as';
 import { 
 	IgxButtonModule,
 	IgxIconModule,
@@ -39,7 +41,9 @@ import { AddadminComponent } from './pages/addadmin/addadmin.component';
 import { UpdateadminpasswordComponent } from './pages/updateadminpassword/updateadminpassword.component';
 import { DeleteadminComponent } from './pages/deleteadmin/deleteadmin.component';
 import { AddmealcountformComponent } from './pages/addmealcountform/addmealcountform.component';
-
+import { SignaturePadComponent } from './pages/signature-pad/signature-pad.component';
+import { PdfViewerComponent } from './pages/pdf-viewer/pdf-viewer.component';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -54,12 +58,16 @@ import { AddmealcountformComponent } from './pages/addmealcountform/addmealcount
     AddadminComponent,
     UpdateadminpasswordComponent,
     DeleteadminComponent,
-    AddmealcountformComponent
+    AddmealcountformComponent,
+    SignaturePadComponent,
+    PdfViewerComponent
 
    
   ],
   imports: [
     BrowserModule,
+    ExportAsModule,
+    NgxPrintModule,
     MatDividerModule,
     MatNativeDateModule,
     MatSnackBarModule,
@@ -85,6 +93,7 @@ import { AddmealcountformComponent } from './pages/addmealcountform/addmealcount
 	IgxIconModule,
 	IgxCardModule,
 	IgxRippleModule,
+  PdfViewerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

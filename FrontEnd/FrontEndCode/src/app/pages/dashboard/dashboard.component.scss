@@ -4,10 +4,18 @@
   flex-direction: column;
   min-width: 300px;
 }
+.value1-bg {
+  background-color: #016b1fbb; /* Red background for 'Value1' */
+}
+
+.value2-bg {
+  background-color: #e4e402; /* Green background for 'Value2' */
+}
+
 
 .example-header {
   min-height: 64px;
-  padding: 8px 24px 0;
+  padding: 8px 24px 0;  
 }
 
 .mat-form-field {
@@ -36,7 +44,36 @@
   color: white; /* Change the text color to white */
 }
 
+.button-container1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 70%;
+  padding: 6px; /* Adjust the padding as needed */
+}/* your-component.component.scss */
+.select-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px; /* Adjust the spacing between the mat-select elements */
+}
+.form-field {
+  flex: 1; /* Distribute available space equally between the form fields */
+  margin-right: 100px; /* Add margin to create space between form fields */
+}
 
+/* Add more styles as needed */
+
+/* your-component.component.scss */
+.filter-container1 {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center the elements horizontally */
+  margin: 0 auto; /* Center the container in its parent */
+  justify-content: space-between;
+}
+
+/* Add more styles as needed */
 
 .icon-button {
   background-color: transparent; /* Remove button background color */
@@ -46,7 +83,7 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  background: none;
+  background: transparent;
 }
 
 .icon-button img {
@@ -83,7 +120,11 @@
 
 
   
- 
+  .table-container {
+    flex: 1; /* Takes up the remaining 50% of the available width */
+    padding: 20px;
+    /* Add other styles for your table container */
+  }
   
   .main-content {
     flex-grow: 1;
@@ -160,33 +201,33 @@ p {
   margin: 20px;
 }
 
-.mat-card {
-  width: 100%;
-  max-width: 400px; /* Adjust the maximum width as needed */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(to bottom, #007bff, #ffffff);
-}
+// .mat-card {
+//   width: 100%;
+//   max-width: 400px; /* Adjust the maximum width as needed */
+//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+//   background: linear-gradient(to bottom, #007bff, #ffffff);
+// }
 
-.mat-card-content-container {
-  display: flex;
-  align-items: center;
-}
+// .mat-card-content-container {
+//   display: flex;
+//   align-items: center;
+// }
 
-.mat-card-image {
-  width: 112px; /* Adjust the image dimensions as needed */
-  height: 112px;
-  margin-right: 20px; /* Adjust the spacing between image and text as needed */
-  object-fit: cover; /* To maintain aspect ratio and fill the container */
-}
+// .mat-card-image {
+//   width: 112px; /* Adjust the image dimensions as needed */
+//   height: 112px;
+//   margin-right: 20px; /* Adjust the spacing between image and text as needed */
+//   object-fit: cover; /* To maintain aspect ratio and fill the container */
+// }
 
-.mat-card-text {
-  flex-grow: 1;
-}
+// .mat-card-text {
+//   flex-grow: 1;
+// }
 
-.mat-card-actions {
-  display: flex;
-  justify-content: flex-end;
-}
+// .mat-card-actions {
+//   display: flex;
+//   justify-content: flex-end;
+// }
 
 button {
   margin-left: 8px; /* Adjust spacing between buttons as needed */
@@ -217,3 +258,80 @@ th.mat-header-cell {
   display: flex;
   justify-content: space-between; /* Adjust alignment as needed */
 }
+.filter-container {
+  display: flex; /* Use flex display to create columns */
+  gap: 5px; /* Add spacing between filter columns */
+  flex: 1; /* Allow columns to grow and fill available space */
+}
+.filter-card {
+  background-color:#037ad691; /* Use the desired sky blue light color */
+  max-width: 100%; /* Set the maximum width to 100% */
+  margin: 0 auto; /* Center the card horizontally */
+  display: flex; /* Use flex display to create a table-like layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next row if necessary */
+  padding: 16px; /* Add some padding to the card */
+}
+.action-buttons {
+  display: flex; /* Display the buttons side by side */
+  gap: 10px; /* Adjust the gap between the buttons as needed */
+  align-items: center; /* Align buttons vertically in the middle */
+  
+}
+
+// .filter-field {
+//   margin-bottom: 20px; /* Add margin to separate the fields vertically */
+// }
+// .program-field-container mat-form-field {
+//   width: 100%; /* Set the desired width */
+//   margin-top: px; /* Adjust the top margin as needed to create space */
+//   /* Add any other styling as desired */
+// }
+
+
+.mat-card {
+  width: 150%;
+  // max-width: 800px;
+  height: 200px; 
+  background: linear-gradient(to bottom, #022c58, #043c70);
+  border: 4px solid black;
+}
+
+.date-time-text {
+  display: flex;
+  align-items: center;
+  flex-direction: column; /* Change to a vertical layout */
+  justify-content: center; /* Center align vertically */
+}
+
+.time {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 5px; /* Add spacing between time and date */
+}
+
+.date {
+  text-align: center;
+  margin-top: 30px; 
+}
+
+
+.larger-time-text {
+  font-size: 9rem !important; /* Adjust the font size as needed */
+}
+
+.date-text-left {
+  font-size: 2.5rem;
+  color: rgb(244, 170, 10);
+}
+
+.date-text-right {
+  font-size: 10rem;
+  color: rgb(244, 177, 6);
+}
+
+.day-text {
+  font-size: 2rem;
+  margin-top: 5px;
+}
+
+  

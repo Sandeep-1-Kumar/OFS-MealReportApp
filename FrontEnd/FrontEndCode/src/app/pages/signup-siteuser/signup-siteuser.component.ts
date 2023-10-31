@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import { NgxMaterialTimepickerComponent } from 'ngx-material-timepicker';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SuccessDialogComponent } from 'src/app/services/success-dialog/success-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-signup-siteuser',
@@ -14,10 +16,10 @@ import { SuccessDialogComponent } from 'src/app/services/success-dialog/success-
 export class SignupSiteuserComponent {
 // Initialize with an empty FormGroup
 userData: { username: string, id: number } = { username: '', id: 0 };
+dialogRef: MatDialogRef<any, any> | null = null;
     //time: { hour: number, minute: number } = { hour: 12, minute: 0 }; // Define the time variable
     registrationForm!: FormGroup;
     tokenPayload: { username: string, userId: number } | null = null;
-
     programs=['SFSP','CACFP']
     dayMapping: { [key: string]: string } = {
       mon: 'Monday',
@@ -28,7 +30,7 @@ userData: { username: string, id: number } = { username: '', id: 0 };
       sat: 'Saturday',
       sun: 'Sunday',
     };
-    constructor(private fb: FormBuilder,private http: HttpClient,private router: Router,public dialog: MatDialog) {
+    constructor(private fb: FormBuilder,private http: HttpClient,private router: Router,public dialog: MatDialog,private snackBar: MatSnackBar) {
       // Initialize time properties
       
     }
@@ -124,23 +126,38 @@ userData: { username: string, id: number } = { username: '', id: 0 };
         
       };
       console.log('Submitted Data:', customFormData);
-      this.http.post('http://localhost:8080/OFS/siteuser/create', customFormData).subscribe(
-    (response) => {
-      console.log('Server response:', response);
-    },
-    (error) => {
-      console.error('Error:', error);
-    }
-  );
-  const dialogRef = this.dialog.open(SuccessDialogComponent, {
-    width: '250px', // Adjust the width as needed
-  });
+        this.http.post<any>('http://localhost:8080/OFS/siteuser/create', customFormData).subscribe(
+        (response) => {
+          console.log('Server response:', response);
+          if (response.statusCode === '201') {
+            console.log('Server response:', response);
+            this.dialogRef = this.dialog.open(SuccessDialogComponent, {
+              width: '250px', // Adjust the width as needed
+            });
+          } else {
+            console.error('Error: Unexpected status code', response.statusCode);
+            // Display an error dialog or handle the error in another way
+            this.snackBar.open('Error exist'+response.statusCode, 'Close', {
+              duration: 3000, // Duration in milliseconds
+            });
+          }
+        },
+        (error) => {
+          console.error('Error:', error);
+        } 
+      );
+     
+      // Handle dialog close event (optional)
+      if (this.dialogRef !== null) {
+        this.dialogRef.afterClosed().subscribe((result) => {
+          console.log('The dialog was closed');
+        });
+      }
+      
 
-  // Handle dialog close event (optional)
-  dialogRef.afterClosed().subscribe((result) => {
-    console.log('The dialog was closed');
-  });
     }
+
+
     stripAmPm(timeValue: string): string {
       // Remove "AM" or "PM" from the time value
       if (timeValue) {

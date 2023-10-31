@@ -10,13 +10,10 @@
                     <fieldset *ngIf="step == 1">
                     <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                        <input type="text" formControlName="siteName" placeholder="siteName" required />
+                        <input type="text" formControlName="siteName" placeholder="siteName"  readonly required />
                     </div>
-        
-                    <div class="input_field">
-                        <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                        <input type="text" formControlName="siteName" placeholder="siteName" required />
-                    </div>
+                    <div *ngIf="siteNameErrorMessage" class="error-message">{{ siteNameErrorMessage }}</div>
+                   
                     <!-- Email Field -->
                     <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
@@ -26,11 +23,16 @@
                     </div>
         
                     <!-- Password Field -->
+                    
                     <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                        <input type="text" formControlName="date" placeholder="date" required />
+                    <mat-form-field>
+                        
+                        <input matInput [matDatepicker]="endDatePicker" placeholder=" Date" formControlName="date">
+                        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endDatePicker></mat-datepicker>
+                      </mat-form-field>
                     </div>
-        
                     <!-- Site Name Field -->
                     <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-user"></i></span>
@@ -72,12 +74,41 @@
                         <input type="text" formControlName="numMealsDelivered" placeholder="numMealsDelivered" required />
                         </div>
         
-                        <div class="input_field">
+                        <!-- <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-user"></i></span>
                         <input type="text" formControlName="deliveryTime" placeholder="deliveryTime" required />
-                        </div>
+                        </div> -->
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fa fa-clock"></i></span>
+                            <!-- <input type="text" formControlName="mealServiceTime" placeholder="mealServiceTime" required /> -->
+                            
+                        <input
+                        #breakfastStartTimeInput
+                        type="text"
+                        placeholder="deliveryTime"
+                        aria-label="deliveryTime"
+                        [ngxTimepicker]="breakfastStartTimepicker"
+                        readonly
+                        formControlName="deliveryTime"
+                      >
+                      <ngx-material-timepicker #breakfastStartTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+                      </div>
                         <!-- Email Field -->
-        
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fa fa-clock"></i></span>
+                            <!-- <input type="text" formControlName="mealServiceTime" placeholder="mealServiceTime" required /> -->
+                            
+                        <input
+                        #breakfastStartTimeInput
+                        type="text"
+                        placeholder="mealServiceTime"
+                        aria-label="mealServiceTime"
+                        [ngxTimepicker]="breakfastEndTimepicker"
+                        readonly
+                        formControlName="mealServiceTime"
+                      >
+                      <ngx-material-timepicker #breakfastEndTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+                      </div>
                         <!-- Password Field -->
                         <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-lock"></i></span>
@@ -85,10 +116,10 @@
                         </div>
         
                         <!-- Site Name Field -->
-                        <div class="input_field">
+                        <!-- <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-user"></i></span>
                         <input type="text" formControlName="mealServiceTime" placeholder="mealServiceTime" required />
-                        </div>
+                        </div> -->
                     </div>
                     <div *ngIf="deliveryReceived === 'no'">
                         <!-- Fields for "Yes" option -->
@@ -97,7 +128,22 @@
                         <span><i aria-hidden="true" class="fa fa-user"></i></span>
                         <input type="text" formControlName="numMealsPreviousDay" placeholder="numMealsPreviousDay" required />
                         </div>
-        
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fa fa-user"></i></span>
+                            <!-- <input type="text" formControlName="mealServiceTime" placeholder="mealServiceTime" required /> -->
+                            
+                        <input
+                        #breakfastStartTimeInput
+                        type="text"
+                        placeholder="Meal Service Time"
+                        aria-label="Breakfast Start Time"
+                        [ngxTimepicker]="breakfastStartTimepicker"
+                        readonly
+                        formControlName="mealServiceTime"
+                      >
+                      <ngx-material-timepicker #breakfastStartTimepicker [enableKeyboardInput]="true"></ngx-material-timepicker>
+                      </div>
+                   
                         <!-- Password Field -->
                         <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-lock"></i></span>
@@ -105,10 +151,10 @@
                         </div>
         
                         <!-- Site Name Field -->
-                        <div class="input_field">
+                        <!-- <div class="input_field">
                         <span><i aria-hidden="true" class="fa fa-user"></i></span>
                         <input type="text" formControlName="mealServiceTime" placeholder="mealServiceTime" required />
-                        </div>
+                        </div> -->
                     </div>
                     <!-- Submit Button -->
                     <div class="button-container">
@@ -116,9 +162,10 @@
                         
                       
                         <button igxButton="raised" color="warn" igxButtonColor="white" igxRipple="black" igxButtonBackground="#00BFFF"
-                        [igxRippleCentered]="true" [igxRippleDuration]="200" [disabled]="deliveryReceived !== 'yes' && deliveryReceived !== 'no'"
+                        [igxRippleCentered]="true" [igxRippleDuration]="200" 
                         (click)="next()">Next
                         </button>
+                        <!-- [disabled]="deliveryReceived !== 'yes' && deliveryReceived !== 'no'" -->
                     </div>
                     </fieldset>
                    </form>
@@ -127,18 +174,57 @@
                     <form [formGroup]="reviewForm">
                     <!-- Username Field -->
                     <fieldset *ngIf="step == 3">
-                        <!-- Did you get a delivery today? (Yes/No) -->
-                        <!-- <div class="input_field centered-textarea">
-                            <span><i aria-hidden="true" class="fa fa-info"></i></span>
-                            <div class="auto-expanding-textarea" [innerHTML]="concatenatedValues()"></div>
-                            <textarea [value]="concatenatedValues()" readonly></textarea>
-                          </div> -->
+                        <mat-card>
+                            <mat-card-header>
+                              <mat-card-title>Review Meal Stats</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                              <div class="input_field">
+                                <p><strong>Delivery Date:</strong> {{ reviewForm.controls['deliveryDate'].value }}</p>
+                              </div>
                           
-                          <div class="input_field">       
-                          <input type="file" accept="image/*" />
-                          <canvas #signatureCanvas width="300" height="150"></canvas>
-                           </div>
-            
+                              <div class="input_field">
+                                <p><strong>Meal Type:</strong> {{ reviewForm.controls['mealType'].value }}</p>
+                              </div>
+                          
+                              <div class ="input_field">
+                                <p><strong>Delivery Stats:</strong> {{ reviewForm.controls['deliveryStats'].value }}</p>
+                              </div>
+                          
+                              <div class="input_field">
+                                <p><strong>Meal Temperature:</strong> {{ reviewForm.controls['mealTemperature'].value }}</p>
+                              </div>
+                          
+                              <div class="input_field">
+                                <p><strong>Meal Service Time:</strong> {{ reviewForm.controls['mealServiceTime'].value }}</p>
+                              </div>
+
+                              <div class="small-square-container">
+                                <div class="square-container">
+                                    <div class="small-square"></div>
+                                    <div class="square-text">abc is why</div>
+                                </div>
+                                <img src="assets/addition.png" alt="Custom Icon">
+                                <div class="square-container">
+                                    <div class="small-square"></div>
+                                    <div class="square-text">pavanala</div>
+                                </div>
+                        
+                                <img src="assets/eq.png" alt="Custom Icon">
+                                
+                            </div>
+                            <br>
+                            <div class="third-square-container">
+                                <div class="small-square"></div>
+                                <div class="square-text1">Third Square</div>
+                            </div>
+                            </mat-card-content>
+
+                          </mat-card>
+                          <button mat-raised-button (click)="openSignatureModal()">digital Sign Here</button>
+                          <br>
+                          <br>
+
                         <!-- Submit Button -->
                         <div class="button-container">
                         <button mat-raised-button color="primary" (click)="previous()">Previous</button>
@@ -154,19 +240,127 @@
                     <form [formGroup]="reviewForm2">
                     <!-- Username Field -->
                     <fieldset *ngIf="step == 4">
-                        <!-- Did you get a delivery today? (Yes/No) -->
-                        <!-- <div class="input_field centered-textarea">
-                            <span><i aria-hidden="true" class="fa fa-info"></i></span>
-                            <div class="auto-expanding-textarea" [innerHTML]="concatenatedValues()"></div>
-                            <textarea [value]="concatenatedValues()" readonly></textarea>
-                          </div> -->
-                          
-                          <!-- <div class="input_field">
-                                
-                          <input type="file" accept="image/*" />
-                          <canvas #signatureCanvas width="300" height="150"></canvas>
-                           </div> -->
-            
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>Meal Service in Progress</mat-card-title>
+                              </mat-card-header>
+                             <br>
+                             <br>
+
+                             
+                        <div class="small-square-container">
+                            <div class="third-square-container">
+                                <div class="small-square custom-square"></div>
+                                <div class="square-text2">Meals Served</div>
+                            </div>
+                        </div>
+<br>
+                        <div class="icon-container">
+                            <img src="assets/plus1.png" alt="Custom Icon" class="large-icon">
+                            <img src="assets/minus.png" alt="Custom Icon" class="large-icon">
+                        </div>
+                        <br>
+                        <div class="small-square-container">
+                            <div class="third-square-container">
+                                <div class="small-square custom-square"></div>
+                                <div class="square-text2">damaged meals</div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="icon-container">
+                            <img src="assets/plus1.png" alt="Custom Icon" class="large-icon">
+                            <img src="assets/minus.png" alt="Custom Icon" class="large-icon">
+                        </div>
+                    </mat-card>
+                        <br>
+                        <!-- Submit Button -->
+                        <div class="button-container">
+                        <button mat-raised-button color="primary" (click)="previous()">Previous</button>
+                        <button igxButton="raised" color="warn" igxButtonColor="white" igxRipple="black" igxButtonBackground="#00BFFF"
+                            [igxRippleCentered]="true" [igxRippleDuration]="200" 
+                            (click)="next()">Next
+                        </button>
+                        </div>
+                    </fieldset>
+                    </form>
+                </div>
+                <div class="form-column">
+                    <form [formGroup]="reviewForm3">
+                    <!-- Username Field -->
+                    <fieldset *ngIf="step == 5">
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>Do you HAve any Meals Expiring Today?</mat-card-title>
+                              </mat-card-header>
+                             <br>
+                             <br>
+                             <div class="radio-group">
+                                <p>Did you get a delivery today?</p>
+                
+                                <button igxButton="raised" [ngClass]="{ 'selected-button': deliveryReceived === 'yes' }" igxButtonColor="black"
+                                igxRipple="black" igxButtonBackground="#72da67" [igxRippleCentered]="true" [igxRippleDuration]="200"
+                                (click)="setDelivery('yes')">Yes
+                                </button>
+                                <span style="margin-right: 9px;"></span>
+                                <button igxButton="raised" [ngClass]="{ 'selected-button': deliveryReceived === 'no' }" igxButtonColor="white"
+                                igxRipple="black" igxButtonBackground="#DC143C" [igxRippleCentered]="true" [igxRippleDuration]="200"
+                                (click)="setDelivery('no')">No
+                                </button>
+                            </div>
+                        <div class="small-square-container">
+                            <div class="third-square-container">
+                                <div class="small-square custom-square"></div>
+                                <div class="square-text2">Meals Served</div>
+                            </div>
+                        </div>
+<br>
+                        <br>
+                        <div class="icon-container">
+                            <img src="assets/plus1.png" alt="Custom Icon" class="large-icon">
+                            <img src="assets/minus.png" alt="Custom Icon" class="large-icon">
+                        </div>
+
+                        
+                    </mat-card>
+                        <br>
+                        <!-- Submit Button -->
+                        <div class="button-container">
+                        <button mat-raised-button color="primary" (click)="previous()">Previous</button>
+                        <button igxButton="raised" color="warn" igxButtonColor="white" igxRipple="black" igxButtonBackground="#00BFFF"
+                            [igxRippleCentered]="true" [igxRippleDuration]="200" 
+                            (click)="next()">Next
+                        </button>
+                        </div>
+                    </fieldset>
+                    </form>
+                </div>
+                <div class="form-column">
+                    <form [formGroup]="reviewForm4">
+                    <!-- Username Field -->
+                    <fieldset *ngIf="step == 6">
+                        <mat-card>
+                            <mat-card-header>
+                                <mat-card-title>Do you HAve any Meals Expiring Today?</mat-card-title>
+                              </mat-card-header>
+                             <br>
+                             <br>
+                             
+                        <div class="small-square-container">
+                            <div class="third-square-container">
+                                <div class="small-square custom-square"></div>
+                                <div class="square-text2">Expired Meals</div>
+                            </div>
+                        </div>
+<br>
+                        <br>
+                        <div class="icon-container">
+                            <img src="assets/plus1.png" alt="Custom Icon" class="large-icon">
+                            <img src="assets/minus.png" alt="Custom Icon" class="large-icon">
+                        </div>
+
+                        
+                    </mat-card>
+                        <br>
                         <!-- Submit Button -->
                         <div class="button-container">
                         <button mat-raised-button color="primary" (click)="previous()">Previous</button>

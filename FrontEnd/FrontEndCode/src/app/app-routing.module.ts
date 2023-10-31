@@ -10,6 +10,7 @@ import { DeleteadminComponent } from './pages/deleteadmin/deleteadmin.component'
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
 import { AddmealcountformComponent } from './pages/addmealcountform/addmealcountform.component';
+import { UpdateadminpasswordComponent } from './pages/updateadminpassword/updateadminpassword.component';
 
 const routes: Routes = [  { path: '', component: LoginComponent },
 { path: 'Dashboard', component: DashboardComponent,canActivate: [AuthGuard] },
@@ -19,6 +20,7 @@ const routes: Routes = [  { path: '', component: LoginComponent },
 { path: 'SiteUserDashboard', component: SiteuserDashboardComponent,canActivate: [AuthGuard]},
 { path: 'edit-siteuser', component: EditSiteuserComponent,canActivate: [AuthGuard]},
 { path: 'addmealcount', component: AddmealcountformComponent,canActivate: [AuthGuard]},
+{ path: 'updateadmin', component: UpdateadminpasswordComponent,canActivate: [AuthGuard]},
 { path: 'Signup', component: SignupSiteuserComponent ,canActivate: [AuthGuard]}];
 
 @NgModule({

@@ -75,6 +75,7 @@ loginSiteuser() : void
 (response) => {
   if (response.statusCode === '200') {
     console.log(response.statusCode);
+    console.log(response);
     const tokenPayload = {
       username: this.username,
       userId: response.id // Assuming you have the user's ID

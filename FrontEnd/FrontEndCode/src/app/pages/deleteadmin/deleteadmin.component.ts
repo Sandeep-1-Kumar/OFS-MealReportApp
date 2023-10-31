@@ -9,6 +9,8 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EditpasswordComponent } from '../editpassword/editpassword.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { UpdateadminpasswordComponent } from '../updateadminpassword/updateadminpassword.component';
 
 
 
@@ -29,7 +31,8 @@ export class DeleteadminComponent {
   userData: { username: string, id: number } = { username: '', id: 0 };
   dataSource= new MatTableDataSource<admin>([]);
   displayedColumns = ['username', 'id','actions'];
-  constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private formBuilder: FormBuilder, private snackBar: MatSnackBar,private dialog: MatDialog) {
+  tokenPayload: { username: string, userId: number } | null = null;
+  constructor(private http: HttpClient,private router: Router,private route: ActivatedRoute,private formBuilder: FormBuilder, private snackBar: MatSnackBar,private dialog: MatDialog,private authService: AuthService,) {
   };
   ngOnInit(): void {
    
@@ -49,6 +52,19 @@ export class DeleteadminComponent {
     );
 
 
+}
+openUpdatePasswordDialog() {
+  const dialogRef = this.dialog.open(UpdateadminpasswordComponent, {
+    width: '300px',
+    data: {
+      username: this.tokenPayload?.username , // Pass the username
+      id: this.tokenPayload?.userId , // Pass the user ID
+    },
+  });
+
+  dialogRef.afterClosed().subscribe(() => {
+    // Handle any logic after the dialog is closed
+  });
 }
 onDeleteClick(adminId: string) {
   // Make an HTTP DELETE request to delete the admin with the specified ID

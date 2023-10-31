@@ -22,7 +22,7 @@
 
             .dashboard-heading {
                 flex: 10%;
-                background-color: #033265; /* Adjust the background color */
+                background-color: #002038; /* Adjust the background color #033265*/
                 color: white; /* Adjust the text color */
                 display: flex;
                 justify-content: center;
@@ -46,7 +46,7 @@
     <body>
         <div class="dashboard-container">
             <div class="dashboard-heading" >
-                <h1 >Welcome,  {{this.tokenPayload?.username}}</h1>
+                <h1 >Welcome Admin {{this.tokenPayload?.username}}</h1>
                 
                 <!-- (ID: {{ userData.id || 'N/A' }})!</h1> -->
                 
@@ -66,13 +66,13 @@
                 <div class="button-container">
                 
                     <button class="icon-button"[routerLink]="['/Signup']" >
-                        <img src="assets/adduser.png" alt="Button Image" style="width: 100px; height: 100px;"> 
+                        <img src="assets/ADDSITE.JPG" alt="Button Image" style="width: 100px; height: 100px;"> 
                         Add Site user
                     </button>
 
                     <button class="icon-button"[routerLink]="['/edit-siteuser']" >
-                        <img src="assets/delete.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                        Remove Site user
+                        <img src="assets/pic1.JPG" alt="Button Image" style="width: 100px; height: 100px;"> 
+                        Edit Site user
                     </button>
 
                     <!-- <button class="icon-button"[routerLink]="['/Signup']" >
@@ -80,23 +80,48 @@
                     Add Meal Count
                     </button> -->
                     <button class="icon-button"[routerLink]="['/addadmin']" >
-                        <img src="assets/addadmin.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                        add admin  
+                        <img src="assets/addadmin.JPG" alt="Button Image" style="width: 100px; height: 100px;"> 
+                        Add Admin  
                     </button>
 
                     <button class="icon-button"[routerLink]="['/deleteadmin']" >
-                        <img src="assets/deleteadmin.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                        Remove admin
+                        <img src="assets/editadmin.JPG" alt="Button Image" style="width: 100px; height: 100px;"> 
+                        Edit Admin
                     </button>
 
-                    <button class="icon-button" (click)="openUpdatePasswordDialog()" >
-                        <img src="assets/update.png" alt="Button Image" style="width: 100px; height: 100px;"> 
-                        update  admin  password
-                    </button>
+                    <!-- <button class="icon-button" (click)="openUpdatePasswordDialog()" >
+                        <img src="assets/editadmin.JPG" alt="Button Image" style="width: 100px; height: 100px;"> 
+                        Edit Admin 
+                    </button> -->
+                </div>
+                <br>
+                <br>
+                
+                <div class="mat-card-container">
+                  <mat-card class="mat-card">
+                    <mat-card-content>
+                      <div class="mat-card-content-container">
+                        <div class="date-time-text time-date-text">
+                          <div class="time">
+                            <h3 class="larger-time-text">{{ currentTime | date:'h:mm a' }}</h3>
+                          </div>
+                          <div class="date date-text">
+                            <div class="date-text-left">
+                              {{ currentDate | date:'d MMM y' }}
+                            </div>
+                            <!-- <div class="date-text-right">
+                              <span class="day-text">{{ currentDate | date:'EEEE' }}</span>
+                            </div> -->
+                          </div>
+                        </div>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
                 </div>
                 
-
-                <div class="mat-card-container">
+                <br>
+                <br>
+                <!-- <div class="mat-card-container">
                     <mat-card class="mat-card">
                     <mat-card-content>
                         <div class="mat-card-content-container">
@@ -106,171 +131,173 @@
                                 <div class="date"><h4>{{ currentDate | date:'mediumDate' }}</h4></div>
                                 <div class="time"><h4>{{ currentTime | date:'shortTime' }}</h4></div>
                             </div>
-                            <!-- <h3>Title goes here</h3>
-                            <p>Secondary text</p> -->
+                          
                         </div>
                         </div>
                     </mat-card-content>
                     </mat-card>
-                </div>
-
-<div class="filter-container custom-filter-container">
+                </div> -->
+<div class="filter-card">
+<div class="filter-container custom-filter-container ">
     <!-- <mat-form-field>
         <input matInput placeholder="Date (YYYY-MM-DD)" [(ngModel)]="filterDate">
       </mat-form-field> -->
-      <mat-form-field>
-        <input matInput placeholder="Program" [(ngModel)]="filterProgram">
-      </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Meal Type" [(ngModel)]="filterMealType">
-    </mat-form-field>
+      <!-- <mat-card class="filter-card"> -->
+        
+        <div class="select-container">
+          
+          <mat-form-field>
+           
+            <mat-select [(ngModel)]="filterSiteName">
+              <mat-option value=''>Any</mat-option>
+              <mat-option *ngFor="let siteName of siteNames" [value]="siteName">{{ siteName }}</mat-option>
+              
+            </mat-select>
+            <mat-label>Site Name</mat-label>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <mat-label>Program</mat-label>
+            <mat-select [(ngModel)]="filterProgram">
+              <mat-option value=''>Any</mat-option>
+              <mat-option value="CACFP">CACFP</mat-option>
+              <mat-option value="SFSP">SFSP</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        
+       
+        <div class="filter-container1">
+          <div class="form-field">
+          <mat-form-field>
+            <mat-label>MealType</mat-label>
+            <mat-select [(ngModel)]="filterMealType">
+              <mat-option value=''>Any</mat-option>
+              <mat-option value="breakfast">Breakfast</mat-option>
+              <mat-option value="lunch">Lunch</mat-option>
+              <mat-option value="snack">Snacks</mat-option>
+              <mat-option value="supper">Supper</mat-option>
+            </mat-select>
+          </mat-form-field>
+          </div>
+          <div class="form-field1">
+          <mat-form-field>
+            <mat-label>StartDate</mat-label>
+            <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" [(ngModel)]="startDate">
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+          </mat-form-field>
+          </div>
+          <div class="form-field1">
+          <mat-form-field>
+            <mat-label>EndDate</mat-label>
+            <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" [(ngModel)]="endDate">
+            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+          </mat-form-field>
+          </div>
+        </div>
+        
     
-    <mat-form-field>
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" [(ngModel)]="startDate">
-      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-      <mat-datepicker #startDatePicker></mat-datepicker>
-    </mat-form-field>
-    
-    <mat-form-field>
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" [(ngModel)]="endDate">
-      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-      <mat-datepicker #endDatePicker></mat-datepicker>
-    </mat-form-field>
-    
-    
-    <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
-  </div>
+    <!-- <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+    <button igxButton="raised" color="warn" igxButtonColor="white" igxRipple="black" igxButtonBackground="#00BFFF"
+   [igxRippleDuration]="200" (click)="openPDF()"class="small-button">Export</button> -->
+   <!-- your-component.component.html -->
+<div class="button-container1">
   
+  <button mat-raised-button color="primary"
+     (click)="export()" >Export</button>
+     <!-- <button (click)="export()">Export </button> -->
 
-                  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 ">
-                    <!-- Username Column -->
-                    <ng-container matColumnDef="siteUserName">
-                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'black'" [style.color]="'white'">  Username </th>
-                      <td mat-cell *matCellDef="let element"> {{element.siteUserName}} </td>
+    <button mat-raised-button color="primary" (click)="applyFilter()">Filter</button>
+</div>
+
+  <!-- </mat-card> -->
+  </div>
+</div>
+  
+<br> 
+<div class="col-md-8" id="htmlData"   class="table-container">
+                  <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8 " #tableToExport>
+                  
+                    <ng-container matColumnDef="siteName">
+                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'"> Site Name</th>
+                      <td mat-cell *matCellDef="let element"> {{element.siteName}} </td>
                     </ng-container>
                     
                     <!-- Meal Date Column -->
                     <ng-container matColumnDef="mealdate">
-                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'black'" [style.color]="'white'"> Meal Date </th>
-                      <td mat-cell *matCellDef="let element"> {{element.mealdate}} </td>
+                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'"> Meal Date </th>
+                      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="mealservicestatus">
+                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'" > Status</th>
+                      <td mat-cell *matCellDef="let element" [ngClass]="{'value1-bg': element.status === 'completed', 'value2-bg': element.status === 'in progress'}"> {{element.status }} </td>
                     </ng-container>
                     
                     <!-- Meal Type Column -->
                     <ng-container matColumnDef="mealtype">
-                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'black'" [style.color]="'white'"> Meal Type </th>
-                      <td mat-cell *matCellDef="let element"> {{element.mealtype}} </td>
+                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'"> Meal Type </th>
+                      <td mat-cell *matCellDef="let element" > {{element.mealType}} </td>
                     </ng-container>
                     
                     <!-- Program Column -->
-                    <ng-container matColumnDef="program">
-                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'black'" [style.color]="'white'"> Program </th>
-                      <td mat-cell *matCellDef="let element"> {{element.program}} </td>
+                    <ng-container matColumnDef="previousdaymeals">
+                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'">Meals Available From PreviousDay  </th>
+                      <td mat-cell *matCellDef="let element"> {{element.mealsAvailableFromPreviousDay}} </td>
                     </ng-container>
                     
                     <!-- Meal Count Column -->
-                    <ng-container matColumnDef="mealcount">
-                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'black'" [style.color]="'white'"> Meal Count </th>
-                      <td mat-cell *matCellDef="let element"> {{element.mealcount}} </td>
+                    <ng-container matColumnDef="mealsdelivered">
+                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'"> Meals Delivered</th>
+                      <td mat-cell *matCellDef="let element"> {{element.mealsDelivered}} </td>
                     </ng-container>
-                    
+                    <ng-container matColumnDef="expiredmeals">
+                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'"> Dicarded /ExpiredMeals </th>
+                      <td mat-cell *matCellDef="let element"> {{element.expiredMeals}} </td>
+                    </ng-container>
                     <!-- Comment Column -->
-                    <ng-container matColumnDef="comment">
-                      <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'black'" [style.color]="'white'"> Comment </th>
-                      <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="siteuserid">
-                        <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'black'" [style.color]="'white'"> siteuserid </th>
-                        <td mat-cell *matCellDef="let element"> {{element.siteuserid}} </td>
+                    
+                    <ng-container matColumnDef="mealsserved">
+                        <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'"> Meals Served </th>
+                        <td mat-cell *matCellDef="let element"> {{element.mealsServed}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="damagedmeals">
+                        <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'"> Damaged Meals </th>
+                        <td mat-cell *matCellDef="let element"> {{element.damagedMeals}} </td>
+                      </ng-container>
+                     
+                      <ng-container matColumnDef="eligiblecarryovermeals">
+                        <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'"> Eligible CarryOver Meals </th>
+                        <td mat-cell *matCellDef="let element"> {{element.eligibleCarryOverMeals}} </td>
                       </ng-container>
                     
+                      <ng-container matColumnDef="comment">
+                        <th mat-header-cell *matHeaderCellDef  [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'"> Comments </th>
+                        <td mat-cell *matCellDef="let element"> {{element.comment}} </td>
+                      </ng-container>
+                       
+                      <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef [style.height.px]="headerHeight" [style.background-color]="'#037ad691'" [style.color]="'black'"> Actions </th>
+                        <td mat-cell *matCellDef="let element">
+                          <div class="action-buttons">
+                            <button mat-icon-button class="action-button" (click)="openPDFPopup('https://example.com/pdf1.pdf',element)">
+                              <mat-icon color="primary">folder</mat-icon> 
+                            </button>
+                            <button mat-icon-button class="action-button" (click)="editItem(element)">
+                              <mat-icon color="primary">edit</mat-icon> 
+                            </button>
+                          </div>
+                        </td>
+                      </ng-container>
+                      
                     <!-- Define the table rows -->
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   </table>
-                  
-                <!-- <div class="example-container mat-elevation-z8">
-                    <div class="example-header">
-                      <mat-form-field>
-                        <input matInput (keyup)="applyFilter('mealType',$any($event.target).value)" placeholder="Filter by mealType">
-
-                      </mat-form-field>
-                      <button mat-flat-button color="warn" (click)="resetFilters()">Reset</button>
-                    </div>  -->
-
-<!--                       
-                    <mat-table #table [dataSource]="dataSource" >
-                  
-                      
-                      <ng-container matColumnDef="siteUserName">
-                        <mat-header-cell *matHeaderCellDef Select Start Time> Username </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.siteUserName}} </mat-cell>
-                      </ng-container>
-                  
-                     
-                      <ng-container matColumnDef="mealDate">
-                        <mat-header-cell *matHeaderCellDef    >  Meal Date </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.mealdate}} </mat-cell>
-                      </ng-container>
-                  
-                      
-                      <ng-container matColumnDef="mealType">
-                        <mat-header-cell *matHeaderCellDef    > Meal Type </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.mealtype}} </mat-cell>
-                      </ng-container>
-                  
-                
-                      <ng-container matColumnDef="program">
-                        <mat-header-cell *matHeaderCellDef    >  Program </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.program}} </mat-cell>
-                      </ng-container>
-                  
-                    
-                      <ng-container matColumnDef="mealCount">
-                        <mat-header-cell *matHeaderCellDef> Meal Count </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.mealcount}} </mat-cell>
-                      </ng-container>
-                  
-                      <ng-container matColumnDef="comment">
-                        <mat-header-cell *matHeaderCellDef> Comment </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.comment}} </mat-cell>
-                      </ng-container>
-                  
-                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-                    </mat-table>
-                    
-                  </div>
-
-
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Select Start Time</th>
-                        <th>Meal Date</th>
-                        <th>Meal Type</th>
-                        <th>Program</th>
-                        <th>Meal Count</th>
-                        <th>Comment</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngFor="let element of dataSource1">
-                          <tr>
-                            <td>{{ element.siteUserName }}</td>
-                            <td>{{ element.mealDate }}</td>
-                            <td>{{ element.mealType }}</td>
-                            <td>{{ element.program }}</td>
-                            <td>{{ element.mealCount }}</td>
-                            <td>{{ element.comment }}</td>
-                          </tr>
-                        </ng-container>
-                      </tbody>
-                  </table>
-                   -->
-                 
+</div>
+               
             </main>
         </div>
     </body>

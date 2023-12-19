@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <h2>Dashboard</h2>
+    <!-- Add your CSS stylesheets and other meta tags here -->
+    <style>
+        /* Add your custom CSS styles here */
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .dashboard-heading {
+            flex: 25%;
+            background-color: #040636; /* Adjust the background color */
+            color: white; /* Adjust the text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .dashboard-heading h1 {
+        font-size: 50px; /* You can adjust the font size as needed */
+    }
+
+        .main-content {
+            flex: 70%;
+            background-color: #f1f1f1; /* Adjust the background color */
+            padding: 20px;
+        }
+
+        .date-time-card {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-heading">
+            <h1 class="dashboard-heading"> Welcome, {{ this.tokenPayload?.username}}</h1>
+        </div>
+        <main class="main-content">
+            <div class="actions-heading">Actions :</div>
+            <div class="button-container">
+  
+                    
+              <div class="button-space"></div>
+              <button mat-raised-button color="warn" [routerLink]="['/login']">Logout</button>
+              
+            </div>
+            <br>
+            <div class="icon-button-container">
+                  <button class="icon-button"[routerLink]="['/addmealcount']"   >
+                    <img src="assets/editmealcount.JPG" alt="Button Image" style="width: 100px; height: 100px;"> 
+                   Add Meal Count
+                  </button>   
+              </div>
+               
+
+              <!-- <div class="mat-card-container">
+                <mat-card class="mat-card">
+                  <mat-card-content>
+                    <div class="mat-card-content-container"> -->
+                      <!-- <img src="assets/time.png" alt="Profile Pic" class="mat-card-image"> -->
+                      <!-- <div class="mat-card-text">
+                        <div class="date-time-text"> -->
+                          <!-- <div class="date">
+                            <p class="date-text">
+                              {{ currentDate | date:'d MMM y' }}<br>
+                              {{ currentDate | date:'EEEE' }}
+                            </p>
+                          </div> -->
+                          <!-- <div class="time">
+                            <h4 class="time-text">{{ currentTime | date:'h:mm a' }}</h4>
+                          </div>
+                          
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+              -->
+           
+<!--               
+              <div class="mat-card-container">
+                <mat-card class="mat-card">
+                  <mat-card-content>
+                    <div class="mat-card-content-container">
+                      <div class="date-time-text time-date-text">
+                        <div class="time">
+                          <h4 class="time-text">{{ currentTime | date:'h:mm a' }}</h4>
+                        </div>
+                        <div class="date date-text">
+                          <div class="date-text-left">
+                            {{ currentDate | date:'d MMM y' }}
+                          </div>
+                          <div class="date-text-right">
+                            <span class="day-text">{{ currentDate | date:'EEEE' }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div> -->
+              <div class="mat-card-container">
+                <mat-card class="mat-card">
+                  <mat-card-content>
+                    <div class="mat-card-content-container">
+                      <div class="date-time-text time-date-text">
+                        <div class="time">
+                          <h3 class="larger-time-text">{{ currentTime | date:'h:mm a' }}</h3>
+                        </div>
+                        <div class="date date-text">
+                          <div class="date-text-left">
+                            {{ currentDate | date:'d MMM y' }}
+                          </div>
+                          <!-- <div class="date-text-right">
+                            <span class="day-text">{{ currentDate | date:'EEEE' }}</span>
+                          </div> -->
+                        </div>
+                      </div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+              
+              
+              
+              
+           
+           
+              
+              
+        </main>
+    </div>
+</body>
+</html>

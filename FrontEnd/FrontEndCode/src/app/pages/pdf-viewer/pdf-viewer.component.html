@@ -1,0 +1,75 @@
+
+   <div id="content" class="pdf-content" #content>
+    
+    <div class="data-container">
+        <div class="data-row">
+          <span class="data-label">Site Name:</span>
+          <span class="data-value">{{ rowData.siteName }}</span>
+          <span class="data-label">Address</span>
+          <span class="data-value">Stlouis</span>
+          <span class="data-label">Site Supervisor</span>
+          <span class="data-value">pavanala</span>
+          <span class="data-label">Date</span>
+          <span class="data-value">Friday, 08-09-2023</span>
+        </div>
+      
+        <div class="data-row">
+            <span class="data-label">Delivery Time:</span>
+          <span class="data-value">9;00 am</span>
+          <span class="data-label">Meal Temperature</span>
+          <span class="data-value">00 F</span>
+          <span class="data-label">Meal Type</span>
+          <span class="data-value">Breakfast lunch </span>
+          <span class="data-label">Meal Service Time</span>
+          <span class="data-value">00am- 00pm</span>
+        </div>
+      
+        <!-- Add similar data rows for other data points -->
+      </div>
+      
+  
+    <div class="additional-info">
+      <p>5 meals from Previous day + 20 Meals Delivered = 25 Meals Available</p>
+      
+    </div>
+  
+    <div class="totals-container">
+        <p class="section-title">MEAL SERVICE DESCRIPTION</p>
+        <div class="data-row1">
+          <span class="data-label1">TOTAL MEALS SERVED</span>
+          <span class="data-value1">5</span>
+        </div>
+        <div class="data-row1">
+          <span class="data-label1">TOTAL DAMAGED MEALS</span>
+          <span class="data-value1">2</span>
+        </div>
+        <div class="data-row1">
+          <span class="data-label1">COMMENT : </span>
+          <span class="data-value2">4 EXPIRING MEALS</span>
+        </div>
+        <div class="data-row1">
+            <span class="data-label1">TOTAL Expired MEALS</span>
+            <span class="data-value1">2</span>
+          </div>
+          <div class="data-row1">
+            <span class="data-label1">COMMENT : </span>
+            <span class="data-value2">4 EXPIRING MEALS</span>
+          </div>
+        <!-- Add similar data rows for other total values -->
+      </div>
+      
+  
+    <hr class="line">
+    
+    <p style="text-align: left;font-size: 10px;">TOTAL MEALS ELIGIBLE TO CARRYOVER TO NEXT MEAL SERVICE</p>
+
+    <div class="signature-container">
+        <img src="brooklyn-image.png" alt="Brooklyn Image">
+     
+      </div>
+      <p class="signature-label">Signature</p>
+      
+  </div>
+  <div class="download-button">
+    <button mat-raised-button color="primary" (click)="downloadPdf()">Download PDF</button>
+  </div>

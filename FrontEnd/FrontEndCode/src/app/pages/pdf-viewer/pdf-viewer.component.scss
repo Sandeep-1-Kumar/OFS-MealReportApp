@@ -1,0 +1,175 @@
+#content {
+    width: 100mm; /* 210mm (A4 width) - 10mm margin on each side */
+    height: 270mm; /* 297mm (A4 height) - 10mm margin on top */
+    margin: 10mm;
+    font-size: 10px;
+}
+
+#content-to-print {
+    font-size: 8pt; /* Adjust the font size as needed */
+  }
+  
+.data-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px; /* Adjust the gap as needed */
+  }
+  .data-label {
+    font-weight: bold; /* Make the label bold */
+  }
+  
+  .data-row {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+  }
+  
+  .data-label.right {
+    justify-self: end; /* Align the label to the right */
+  }
+  
+  .data-value {
+    margin-top: 0px; /* Adjust the margin as needed */
+  }
+    
+  
+  .pdf-popup-container {
+    position: fixed;
+    top: 10%; /* Adjust the top position as needed */
+    left: 10%; /* Adjust the left position as needed */
+    width: 80%; /* Adjust the width as needed */
+    height: 80%; /* Adjust the height as needed */
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    overflow: auto;
+    max-width: 600px; /* A4 width in pixels */
+    max-height: 1191px; /* A4 height in pixels */
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .pdf-iframe {
+    width: 100%;
+    height: 100%;
+    border: none; /* Removes iframe border */
+  }
+  /* pdf-viewer.component.scss */
+
+.pdf-popup {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    .pdf-content {
+      margin-top: 20px;
+    }
+  
+    .close-button {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+  }
+  .pdf-content {
+    text-align: center;
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    th, td {
+      border: 1px solid #000;
+      padding: 5px;
+    }
+    th {
+      background-color: #ccc;
+    }
+  }
+  
+  .additional-info {
+    font-weight: bold;
+    margin-top: 10px;
+    
+    p {
+      margin: 5px 0;
+    }
+   
+  }
+  .additional-info p {
+    font-weight: bold;
+    font-size: 8px;
+  }
+  .totals-container {
+    text-align: left;
+    margin-top: 20px;
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 8px;
+    }
+    .data-row1 {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+      justify-content: space-between;
+    }
+    .data-value1 {
+        margin-right: 100px; /* Adjust the margin as needed */
+        font-size: 8px;
+      }
+      .left-align {
+        text-align: left;
+      }
+      
+      .data-value2 {
+        margin-right: 700px; /* Adjust the margin as needed */
+        font-size: 8px;
+      }
+    .data-label1 {
+      font-weight: bold;
+      width: 200px; /* Adjust the width as needed */
+      font-size: 8px;
+    }
+  }
+  
+  
+  
+  .line {
+    margin: 20px 0;
+    border-top: 1px solid #000;
+  }.signature-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .signature-container img {
+    width: 100px; /* Adjust the width of the image */
+    margin-right: 10px; /* Add margin to move the image to the left */
+  }
+  
+  .signature-line {
+    border-top: 1px solid black;
+    width: 100%; /* Set the width to 100% to span the entire container */
+    margin-top: 5px;
+  }
+  
+  .signature-label {
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  

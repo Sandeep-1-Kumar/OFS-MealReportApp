@@ -43,6 +43,9 @@ import javax.persistence.Query;
 public class MealController {
 
     public static final String MEAL_ADD_IN_SUCCESS_CODE = "201";
+    //updated code
+    public static final String MEAL_ADD_IN_SUCCESS_CODE_2 = "301";
+    
     public static final String MEAL_ADD_IN_FAILURE_CODE = "409";
     public static final String MEAL_UPDATE_SUCCESS_CODE = "204";
     public static final String MEAL_UPDATE_FAILURE_CODE = "400";

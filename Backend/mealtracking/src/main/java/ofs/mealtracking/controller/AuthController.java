@@ -31,6 +31,8 @@ import java.util.*;
 
 public class AuthController
 {
+
+    // Hi this is mike
     //Defining all response attributes
     private AuthorizationResponseJson authorizationResponseJson;
     public static final String SIGN_IN_SUCCESS_CODE = "200";

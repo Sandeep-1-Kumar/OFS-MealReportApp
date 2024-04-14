@@ -43,6 +43,11 @@ public class AuthController
     public static final String SIGN_IN_SUCCESS_CODE_3 = "300";
     //updated code2
     
+
+    //wantedly creating merge conflict
+
+
+
     public static final String SIGN_IN_FAILURE_CODE = "404";
     public static final String SIGN_UP_SUCCESS_CODE = "201";
     public static final String SIGN_UP_FAILURE_CODE = "409";

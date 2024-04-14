@@ -34,6 +34,13 @@ public class AuthController
     //Defining all response attributes
     private AuthorizationResponseJson authorizationResponseJson;
     public static final String SIGN_IN_SUCCESS_CODE = "200";
+    //updated code
+    public static final String SIGN_IN_SUCCESS_CODE_2 = "100";
+    //updated code
+    //updated code2
+    public static final String SIGN_IN_SUCCESS_CODE_3 = "300";
+    //updated code2
+    
     public static final String SIGN_IN_FAILURE_CODE = "404";
     public static final String SIGN_UP_SUCCESS_CODE = "201";
     public static final String SIGN_UP_FAILURE_CODE = "409";
